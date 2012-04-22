@@ -17,7 +17,6 @@
 		631339AD154391A600FD8B46 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339A0154391A600FD8B46 /* Icon-Small@2x.png */; };
 		631339AE154391A600FD8B46 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339A1154391A600FD8B46 /* Icon.png */; };
 		631339AF154391A600FD8B46 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339A2154391A600FD8B46 /* Icon@2x.png */; };
-		631339B0154391A600FD8B46 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 631339A3154391A600FD8B46 /* Info.plist */; };
 		631339B1154391A600FD8B46 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 631339A4154391A600FD8B46 /* iTunesArtwork */; };
 		631339B2154391A600FD8B46 /* seeker.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339A5154391A600FD8B46 /* seeker.png */; };
 		631339CE154396E300FD8B46 /* GameModeSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 631339C4154396E300FD8B46 /* GameModeSelectionScene.m */; };
@@ -1102,7 +1101,6 @@
 				631339AD154391A600FD8B46 /* Icon-Small@2x.png in Resources */,
 				631339AE154391A600FD8B46 /* Icon.png in Resources */,
 				631339AF154391A600FD8B46 /* Icon@2x.png in Resources */,
-				631339B0154391A600FD8B46 /* Info.plist in Resources */,
 				631339B1154391A600FD8B46 /* iTunesArtwork in Resources */,
 				631339B2154391A600FD8B46 /* seeker.png in Resources */,
 				631339D115439E2200FD8B46 /* Default@2x.png in Resources */,
@@ -1292,7 +1290,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Conquer-iOS/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Conquer-iOS/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lz";
@@ -1311,7 +1309,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Conquer-iOS/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Conquer-iOS/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lz";
