@@ -1,9 +1,9 @@
 //
-//  HelloWorldLayer.h
+//  GameModeSelectionScene.h
 //  Conquer-iOS
 //
-//  Created by Mac User on 4/19/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by Steve Johnson on 4/19/12.
+//  Copyright ConquerCorp 2012. All rights reserved.
 //
 
 
@@ -14,14 +14,12 @@
 #import "chipmunk.h"
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer
+@interface GameModeSelectionScene : CCLayer
 {
 	cpSpace *space;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
--(void) step: (ccTime) dt;
--(void) addNewSpriteX:(float)x y:(float)y;
 
 @end
