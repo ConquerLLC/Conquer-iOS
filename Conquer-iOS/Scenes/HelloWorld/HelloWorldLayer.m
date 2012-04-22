@@ -104,7 +104,7 @@ eachShape(void *ptr, void* unused)
                                                                      block:^(id sender) {
                                                                          NSLog(@"The second menu was called");
                                                                      }
-                                       ];
+                                       ];   
         
         CCMenuItemImage * menuItem3 = [CCMenuItemImage itemFromNormalImage: [[NSBundle mainBundle] pathForResource:@"mythirdbutton" ofType:@"png" inDirectory:@"Buttons"]
                                                              selectedImage: [[NSBundle mainBundle] pathForResource:@"mythirdbutton_selected" ofType:@"png" inDirectory:@"Buttons"]

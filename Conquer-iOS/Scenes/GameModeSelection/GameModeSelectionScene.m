@@ -50,7 +50,7 @@
                                                                      block:^(id sender) {
                                                                          dispatch_async(dispatch_get_main_queue(), ^{
                                                                              [[CCDirector sharedDirector] replaceScene:
-                                                                          [CCTransitionFade transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
+                                                                          [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
                                                                          });
                                                                      }
                                        ];
