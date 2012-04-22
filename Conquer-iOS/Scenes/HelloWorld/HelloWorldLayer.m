@@ -91,11 +91,7 @@ eachShape(void *ptr, void* unused)
         CCMenuItemImage * menuItem1 = [CCMenuItemImage itemFromNormalImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton" ofType:@"png" inDirectory:@"Buttons"]
                                                              selectedImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton_selected" ofType:@"png" inDirectory:@"Buttons"]
                                                                      block:^(id sender) {
-                                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                                             [[CCDirector sharedDirector] replaceScene:
-                                                                              [CCTransitionFade transitionWithDuration:0.5f scene:[GameModeSelectionScene scene]]];
-                                                                         });
-                                                                        
+                                                                        [[CCDirector sharedDirector] popScene];
                                                                      }
                                        ];
         

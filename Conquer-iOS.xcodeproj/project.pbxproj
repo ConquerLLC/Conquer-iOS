@@ -22,6 +22,7 @@
 		631339B2154391A600FD8B46 /* seeker.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339A5154391A600FD8B46 /* seeker.png */; };
 		631339CE154396E300FD8B46 /* GameModeSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 631339C4154396E300FD8B46 /* GameModeSelectionScene.m */; };
 		631339CF154396E300FD8B46 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 631339C7154396E300FD8B46 /* HelloWorldLayer.m */; };
+		631339D115439E2200FD8B46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 631339D015439E2200FD8B46 /* Default@2x.png */; };
 		63649A2A1540F9EE0014BAE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63649A291540F9EE0014BAE7 /* QuartzCore.framework */; };
 		63649A2C1540F9EE0014BAE7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63649A2B1540F9EE0014BAE7 /* OpenGLES.framework */; };
 		63649A2E1540F9EE0014BAE7 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63649A2D1540F9EE0014BAE7 /* OpenAL.framework */; };
@@ -173,6 +174,7 @@
 		631339C4154396E300FD8B46 /* GameModeSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeSelectionScene.m; sourceTree = "<group>"; };
 		631339C6154396E300FD8B46 /* HelloWorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		631339C7154396E300FD8B46 /* HelloWorldLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		631339D015439E2200FD8B46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		63649A251540F9EE0014BAE7 /* Conquer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Conquer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63649A291540F9EE0014BAE7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		63649A2B1540F9EE0014BAE7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -605,6 +607,7 @@
 			children = (
 				63133999154391A600FD8B46 /* Buttons */,
 				6313399A154391A600FD8B46 /* Default.png */,
+				631339D015439E2200FD8B46 /* Default@2x.png */,
 				6313399B154391A600FD8B46 /* fps_images.png */,
 				6313399C154391A600FD8B46 /* grossini_dance_atlas.png */,
 				6313399D154391A600FD8B46 /* Icon-72.png */,
@@ -1102,6 +1105,7 @@
 				631339B0154391A600FD8B46 /* Info.plist in Resources */,
 				631339B1154391A600FD8B46 /* iTunesArtwork in Resources */,
 				631339B2154391A600FD8B46 /* seeker.png in Resources */,
+				631339D115439E2200FD8B46 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

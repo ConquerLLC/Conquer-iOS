@@ -36,9 +36,7 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-		       
-        self.isTouchEnabled = YES;
-        
+		               
         // register to receive targeted touch events
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self
                                                          priority:0
@@ -48,13 +46,11 @@
         CCMenuItemImage * menuItem1 = [CCMenuItemImage itemFromNormalImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton" ofType:@"png" inDirectory:@"Buttons"]
                                                              selectedImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton_selected" ofType:@"png" inDirectory:@"Buttons"]
                                                                      block:^(id sender) {
-                                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                                             [[CCDirector sharedDirector] replaceScene:
+                                                                        [[CCDirector sharedDirector] pushScene:
                                                                           [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[HelloWorldLayer scene]]];
-                                                                         });
                                                                      }
                                        ];
-        
+               
         
         
         // Create a menu and add your menu items to it
@@ -69,6 +65,10 @@
     }
     
 	return self;
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return NO;
 }
 
 // on "dealloc" you need to release all your retained objects
