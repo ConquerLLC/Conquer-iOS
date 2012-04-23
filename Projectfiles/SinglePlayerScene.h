@@ -1,5 +1,5 @@
 //
-//  SceneBase.h
+//  GameModeSelectionScene.h
 //  Conquer
 //
 //  Created by Steve Johnson on 4/23/12.
@@ -7,11 +7,11 @@
 //
 
 #import "cocos2d.h"
+#import "SceneBase.h"
 
-@interface SceneBase : CCScene
+@interface SinglePlayerScene : SceneBase
 {
-}
 
-+(id) scene;
+}
 
 @end

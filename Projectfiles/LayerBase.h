@@ -1,5 +1,5 @@
 //
-//  SceneBase.h
+//  LayerBase.h
 //  Conquer
 //
 //  Created by Steve Johnson on 4/23/12.
@@ -8,10 +8,10 @@
 
 #import "cocos2d.h"
 
-@interface SceneBase : CCScene
+@interface LayerBase : CCLayer
 {
+	
 }
 
-+(id) scene;
 
 @end

@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */; };
-		63ACAB081545F0C6004E1FF6 /* SceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB071545F0C6004E1FF6 /* SceneBase.m */; };
+		63ACAB081545F0C6004E1FF6 /* LayerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB071545F0C6004E1FF6 /* LayerBase.m */; };
 		63ACAB101545F308004E1FF6 /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB0F1545F308004E1FF6 /* Buttons */; };
+		63ACAB12154605BF004E1FF6 /* HUD in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB11154605BF004E1FF6 /* HUD */; };
+		63ACAB17154609BD004E1FF6 /* SceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB16154609BD004E1FF6 /* SceneBase.m */; };
+		63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
 		DC485B4613AA18A600F2BC70 /* libcocosdenshion-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B4513AA18A600F2BC70 /* libcocosdenshion-mac.a */; };
@@ -65,9 +68,14 @@
 /* Begin PBXFileReference section */
 		63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeSelectionScene.h; sourceTree = "<group>"; };
 		63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeSelectionScene.m; sourceTree = "<group>"; };
-		63ACAB061545F0C6004E1FF6 /* SceneBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneBase.h; sourceTree = "<group>"; };
-		63ACAB071545F0C6004E1FF6 /* SceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneBase.m; sourceTree = "<group>"; };
+		63ACAB061545F0C6004E1FF6 /* LayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerBase.h; sourceTree = "<group>"; };
+		63ACAB071545F0C6004E1FF6 /* LayerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerBase.m; sourceTree = "<group>"; };
 		63ACAB0F1545F308004E1FF6 /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
+		63ACAB11154605BF004E1FF6 /* HUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HUD; sourceTree = "<group>"; };
+		63ACAB15154609BD004E1FF6 /* SceneBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneBase.h; sourceTree = "<group>"; };
+		63ACAB16154609BD004E1FF6 /* SceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneBase.m; sourceTree = "<group>"; };
+		63ACAB1815460AD0004E1FF6 /* SinglePlayerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerScene.h; sourceTree = "<group>"; };
+		63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerScene.m; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
 		DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libbox2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,14 +170,34 @@
 		63ACAAFF1545EDF3004E1FF6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				DC81EAA7141280D400735365 /* TileMapLayer.h */,
-				DC81EAA8141280D400735365 /* TileMapLayer.m */,
-				63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */,
-				63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */,
-				63ACAB061545F0C6004E1FF6 /* SceneBase.h */,
-				63ACAB071545F0C6004E1FF6 /* SceneBase.m */,
+				63ACAB1415460984004E1FF6 /* SinglePlayer */,
+				63ACAB131546096F004E1FF6 /* GameModeSelection */,
+				63ACAB061545F0C6004E1FF6 /* LayerBase.h */,
+				63ACAB071545F0C6004E1FF6 /* LayerBase.m */,
+				63ACAB15154609BD004E1FF6 /* SceneBase.h */,
+				63ACAB16154609BD004E1FF6 /* SceneBase.m */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		63ACAB131546096F004E1FF6 /* GameModeSelection */ = {
+			isa = PBXGroup;
+			children = (
+				63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */,
+				63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */,
+			);
+			name = GameModeSelection;
+			sourceTree = "<group>";
+		};
+		63ACAB1415460984004E1FF6 /* SinglePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				63ACAB1815460AD0004E1FF6 /* SinglePlayerScene.h */,
+				63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */,
+				DC81EAA7141280D400735365 /* TileMapLayer.h */,
+				DC81EAA8141280D400735365 /* TileMapLayer.m */,
+			);
+			name = SinglePlayer;
 			sourceTree = "<group>";
 		};
 		DC81EAAC141281CE00735365 /* David Gervais Tilesets */ = {
@@ -277,6 +305,7 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63ACAB11154605BF004E1FF6 /* HUD */,
 				63ACAB0F1545F308004E1FF6 /* Buttons */,
 				DC81EAAB141281CE00735365 /* alien-sfx.caf */,
 				DC81EAB0141281CE00735365 /* game-events.png */,
@@ -397,6 +426,7 @@
 				DC81EAC3141281CE00735365 /* orthogonal.tmx in Resources */,
 				DC81EAC5141281CE00735365 /* fx-explosion.plist in Resources */,
 				63ACAB101545F308004E1FF6 /* Buttons in Resources */,
+				63ACAB12154605BF004E1FF6 /* HUD in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +459,9 @@
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,
 				DC81EAA9141280D400735365 /* TileMapLayer.m in Sources */,
 				63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */,
-				63ACAB081545F0C6004E1FF6 /* SceneBase.m in Sources */,
+				63ACAB081545F0C6004E1FF6 /* LayerBase.m in Sources */,
+				63ACAB17154609BD004E1FF6 /* SceneBase.m in Sources */,
+				63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +518,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../__Kobold2D__/libs/GoogleAdMobAdsSDK\"",
 				);
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -499,7 +531,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../__Kobold2D__/libs/GoogleAdMobAdsSDK\"",
 				);
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

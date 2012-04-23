@@ -35,6 +35,7 @@
 #endif
 
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"alien-sfx.caf"];
+	
 	}
 
 	return self;
