@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */; };
+		63ACAB081545F0C6004E1FF6 /* SceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB071545F0C6004E1FF6 /* SceneBase.m */; };
+		63ACAB101545F308004E1FF6 /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB0F1545F308004E1FF6 /* Buttons */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
 		DC485B4613AA18A600F2BC70 /* libcocosdenshion-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B4513AA18A600F2BC70 /* libcocosdenshion-mac.a */; };
@@ -60,6 +63,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeSelectionScene.h; sourceTree = "<group>"; };
+		63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeSelectionScene.m; sourceTree = "<group>"; };
+		63ACAB061545F0C6004E1FF6 /* SceneBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneBase.h; sourceTree = "<group>"; };
+		63ACAB071545F0C6004E1FF6 /* SceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneBase.m; sourceTree = "<group>"; };
+		63ACAB0F1545F308004E1FF6 /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
 		DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libbox2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +159,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63ACAAFF1545EDF3004E1FF6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DC81EAA7141280D400735365 /* TileMapLayer.h */,
+				DC81EAA8141280D400735365 /* TileMapLayer.m */,
+				63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */,
+				63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */,
+				63ACAB061545F0C6004E1FF6 /* SceneBase.h */,
+				63ACAB071545F0C6004E1FF6 /* SceneBase.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		DC81EAAC141281CE00735365 /* David Gervais Tilesets */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +265,7 @@
 		DCC1A38C13A94F1A005BD75D /* Projectfiles */ = {
 			isa = PBXGroup;
 			children = (
-				DC81EAA7141280D400735365 /* TileMapLayer.h */,
-				DC81EAA8141280D400735365 /* TileMapLayer.m */,
+				63ACAAFF1545EDF3004E1FF6 /* Scenes */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
@@ -257,6 +277,7 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63ACAB0F1545F308004E1FF6 /* Buttons */,
 				DC81EAAB141281CE00735365 /* alien-sfx.caf */,
 				DC81EAB0141281CE00735365 /* game-events.png */,
 				DC81EAB1141281CE00735365 /* orthogonal.tmx */,
@@ -333,7 +354,7 @@
 		DCC1A0D813A94EC0005BD75D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "Conquer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -375,6 +396,7 @@
 				DC81EAC1141281CE00735365 /* game-events.png in Resources */,
 				DC81EAC3141281CE00735365 /* orthogonal.tmx in Resources */,
 				DC81EAC5141281CE00735365 /* fx-explosion.plist in Resources */,
+				63ACAB101545F308004E1FF6 /* Buttons in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +428,8 @@
 				DCC1A3A913A94F1A005BD75D /* AppDelegate.m in Sources */,
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,
 				DC81EAA9141280D400735365 /* TileMapLayer.m in Sources */,
+				63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */,
+				63ACAB081545F0C6004E1FF6 /* SceneBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,10 +481,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */;
 			buildSettings = {
+				GCC_THUMB_SUPPORT = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../__Kobold2D__/libs/GoogleAdMobAdsSDK\"",
 				);
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -468,10 +494,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */;
 			buildSettings = {
+				GCC_THUMB_SUPPORT = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../__Kobold2D__/libs/GoogleAdMobAdsSDK\"",
 				);
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

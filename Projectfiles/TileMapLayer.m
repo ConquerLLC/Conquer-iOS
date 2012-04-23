@@ -10,14 +10,6 @@
 
 @implementation TileMapLayer
 
-+(id) node
-{
-	CCScene *scene = [CCScene node];
-	TileMapLayer *layer = [TileMapLayer node];
-	[scene addChild: layer];
-	return scene;
-}
-
 -(id) init
 {
 	if ((self = [super init]))

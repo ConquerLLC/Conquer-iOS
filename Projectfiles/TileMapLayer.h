@@ -6,17 +6,16 @@
  */
 
 #import "cocos2d.h"
+#import "SceneBase.h"
 
 enum
 {
 	TileMapNode = 0,
 };
 
-@interface TileMapLayer : CCLayer
+@interface TileMapLayer : SceneBase
 {
 	float tileMapHeightInPixels;
 }
-
-+(id) node;
 
 @end
