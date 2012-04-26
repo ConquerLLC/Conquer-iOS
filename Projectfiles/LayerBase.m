@@ -14,15 +14,18 @@
 {
 	if ((self = [super init]))
 	{
-		
+
 	}
 	
 	return self;
 }
 
-/* By default - a layer does not handle touches */
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return NO;
+
++(id) scene {
+	CCScene *scene = [CCScene node];
+	id layer = [self node];
+	[scene addChild: layer];
+	return scene;
 }
 
 @end

@@ -10,8 +10,8 @@
 
 @interface LayerBase : CCLayer
 {
-	
 }
 
++(id) scene;
 
 @end

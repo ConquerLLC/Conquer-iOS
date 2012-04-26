@@ -1,5 +1,5 @@
 //
-//  GameModeSelectionScene.h
+//  SinglePlayerScene.h
 //  Conquer
 //
 //  Created by Steve Johnson on 4/23/12.
@@ -7,11 +7,13 @@
 //
 
 #import "cocos2d.h"
-#import "SceneBase.h"
+#import "LayerBase.h"
 
-@interface SinglePlayerScene : SceneBase
+@class Map;
+
+@interface SinglePlayerScene : LayerBase
 {
-
+	Map* map;
 }
 
 @end

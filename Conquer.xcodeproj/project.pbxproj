@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */; };
-		63ACAB081545F0C6004E1FF6 /* LayerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB071545F0C6004E1FF6 /* LayerBase.m */; };
 		63ACAB101545F308004E1FF6 /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB0F1545F308004E1FF6 /* Buttons */; };
 		63ACAB12154605BF004E1FF6 /* HUD in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB11154605BF004E1FF6 /* HUD */; };
-		63ACAB17154609BD004E1FF6 /* SceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB16154609BD004E1FF6 /* SceneBase.m */; };
+		63ACAB17154609BD004E1FF6 /* LayerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB16154609BD004E1FF6 /* LayerBase.m */; };
 		63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */; };
+		63ACAB1C15470D69004E1FF6 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB1B15470D69004E1FF6 /* Maps */; };
+		63ACAB201548BC35004E1FF6 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1F1548BC35004E1FF6 /* Map.m */; };
+		63ACAB231548C359004E1FF6 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Country.m */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
 		DC485B4613AA18A600F2BC70 /* libcocosdenshion-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B4513AA18A600F2BC70 /* libcocosdenshion-mac.a */; };
@@ -68,14 +70,17 @@
 /* Begin PBXFileReference section */
 		63ACAB031545EEC6004E1FF6 /* GameModeSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeSelectionScene.h; sourceTree = "<group>"; };
 		63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeSelectionScene.m; sourceTree = "<group>"; };
-		63ACAB061545F0C6004E1FF6 /* LayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerBase.h; sourceTree = "<group>"; };
-		63ACAB071545F0C6004E1FF6 /* LayerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerBase.m; sourceTree = "<group>"; };
 		63ACAB0F1545F308004E1FF6 /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
 		63ACAB11154605BF004E1FF6 /* HUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HUD; sourceTree = "<group>"; };
-		63ACAB15154609BD004E1FF6 /* SceneBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneBase.h; sourceTree = "<group>"; };
-		63ACAB16154609BD004E1FF6 /* SceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneBase.m; sourceTree = "<group>"; };
+		63ACAB15154609BD004E1FF6 /* LayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LayerBase.h; sourceTree = "<group>"; };
+		63ACAB16154609BD004E1FF6 /* LayerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerBase.m; sourceTree = "<group>"; };
 		63ACAB1815460AD0004E1FF6 /* SinglePlayerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerScene.h; sourceTree = "<group>"; };
 		63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerScene.m; sourceTree = "<group>"; };
+		63ACAB1B15470D69004E1FF6 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
+		63ACAB1E1548BC35004E1FF6 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		63ACAB1F1548BC35004E1FF6 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		63ACAB211548C359004E1FF6 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		63ACAB221548C359004E1FF6 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
 		DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libbox2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,10 +177,8 @@
 			children = (
 				63ACAB1415460984004E1FF6 /* SinglePlayer */,
 				63ACAB131546096F004E1FF6 /* GameModeSelection */,
-				63ACAB061545F0C6004E1FF6 /* LayerBase.h */,
-				63ACAB071545F0C6004E1FF6 /* LayerBase.m */,
-				63ACAB15154609BD004E1FF6 /* SceneBase.h */,
-				63ACAB16154609BD004E1FF6 /* SceneBase.m */,
+				63ACAB15154609BD004E1FF6 /* LayerBase.h */,
+				63ACAB16154609BD004E1FF6 /* LayerBase.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -198,6 +201,17 @@
 				DC81EAA8141280D400735365 /* TileMapLayer.m */,
 			);
 			name = SinglePlayer;
+			sourceTree = "<group>";
+		};
+		63ACAB1D1548BC0D004E1FF6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63ACAB1E1548BC35004E1FF6 /* Map.h */,
+				63ACAB1F1548BC35004E1FF6 /* Map.m */,
+				63ACAB211548C359004E1FF6 /* Country.h */,
+				63ACAB221548C359004E1FF6 /* Country.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		DC81EAAC141281CE00735365 /* David Gervais Tilesets */ = {
@@ -293,6 +307,7 @@
 		DCC1A38C13A94F1A005BD75D /* Projectfiles */ = {
 			isa = PBXGroup;
 			children = (
+				63ACAB1D1548BC0D004E1FF6 /* Models */,
 				63ACAAFF1545EDF3004E1FF6 /* Scenes */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
@@ -305,6 +320,7 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63ACAB1B15470D69004E1FF6 /* Maps */,
 				63ACAB11154605BF004E1FF6 /* HUD */,
 				63ACAB0F1545F308004E1FF6 /* Buttons */,
 				DC81EAAB141281CE00735365 /* alien-sfx.caf */,
@@ -427,6 +443,7 @@
 				DC81EAC5141281CE00735365 /* fx-explosion.plist in Resources */,
 				63ACAB101545F308004E1FF6 /* Buttons in Resources */,
 				63ACAB12154605BF004E1FF6 /* HUD in Resources */,
+				63ACAB1C15470D69004E1FF6 /* Maps in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,9 +476,10 @@
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,
 				DC81EAA9141280D400735365 /* TileMapLayer.m in Sources */,
 				63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */,
-				63ACAB081545F0C6004E1FF6 /* LayerBase.m in Sources */,
-				63ACAB17154609BD004E1FF6 /* SceneBase.m in Sources */,
+				63ACAB17154609BD004E1FF6 /* LayerBase.m in Sources */,
 				63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */,
+				63ACAB201548BC35004E1FF6 /* Map.m in Sources */,
+				63ACAB231548C359004E1FF6 /* Country.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

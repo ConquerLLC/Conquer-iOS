@@ -1,5 +1,5 @@
 //
-//  GameModeSelectionScene.m
+//  SinglePlayerScene.m
 //  Conquer
 //
 //  Created by Steve Johnson on 4/23/12.
@@ -7,6 +7,7 @@
 //
 
 #import "SinglePlayerScene.h"
+#import "Map.h"
 
 #import "TileMapLayer.h"
 
@@ -17,19 +18,46 @@
 {
 	if ((self = [super init]))
 	{
-		TileMapLayer* tileMapLayer = [TileMapLayer node];
-		[self addChild:tileMapLayer z:0];
+		CGSize winSize = [[CCDirector sharedDirector] winSize];
+
+		//setup the basic scene
+		
+		CCSprite* mapBackground = [CCSprite spriteWithFile:@"Maps/Background.png"];
+		mapBackground.position = ccp(winSize.width/2, winSize.height/2);
+		[self addChild:mapBackground z:-1];
+		
+		CCSprite* hud = [CCSprite spriteWithFile:@"HUD/SinglePlayer.png"];
+		hud.position = ccp(winSize.width/2, winSize.height/2);
+		[self addChild:hud z:10];
 		
 		
-		CCSprite* hud = [CCSprite spriteWithFile:@"HUD/GameHUD.png"];
-		hud.position = ccp(512,384);
-		[self addChild:hud z:1];
+		map = [[Map alloc] initWithMapName:@"WorldMap1"];
+		[self addChild:[map displayNode] z:0];
+		
+		
+		
+		self.isTouchEnabled = true;
 	}
 	
 	
 	return self;
 }
 
+
+
+
+
+
+
+
+
+
+-(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touch began!");
+	// get the position in tile coordinates from the touch location
+	[map countryAtTouch:[touches anyObject]];
+}
 
 
 @end

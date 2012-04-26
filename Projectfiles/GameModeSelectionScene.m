@@ -31,10 +31,7 @@
         // Create a menu and add your menu items to it
         CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
         
-        id waves = [CCWaves actionWithWaves:5 amplitude:20 horizontal:YES vertical:NO grid:ccg(32,24) duration:5];
-        CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        
+        id waves = [CCWaves actionWithWaves:5 amplitude:20 horizontal:YES vertical:NO grid:ccg(32,24) duration:5];        
         [myMenu runAction: [CCRepeatForever actionWithAction: waves]];
 		
         // Arrange the menu items vertically
@@ -49,7 +46,5 @@
 	
 	return self;
 }
-
-
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import "cocos2d.h"
-#import "SceneBase.h"
+#import "LayerBase.h"
 
-@interface GameModeSelectionScene : SceneBase
+@interface GameModeSelectionScene : LayerBase
 {
 
 }
