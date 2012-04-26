@@ -8,8 +8,15 @@
 
 #import "Map.h"
 
+@interface Map (PrivateAPI)
+-(void)createHitMap;
+-(CGPoint)toGridLocation:(CGPoint)location;
+-(CGPoint)locationFromTouch:(UITouch*)touch;
+-(UInt32)colorAtLocation:(CGPoint)location;
+@end
 
 @implementation Map
+
 
 -(id)initWithMapName:(NSString*)theMapName {
 	
