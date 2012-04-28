@@ -7,15 +7,23 @@
 //
 
 #import "Map.h"
+#import "Territory.h"
+#import "Continent.h"
 
 @interface Map (PrivateAPI)
 -(void)createHitMap;
 -(CGPoint)toGridLocation:(CGPoint)location;
 -(CGPoint)locationFromTouch:(UITouch*)touch;
 -(UInt32)colorAtLocation:(CGPoint)location;
+-(void)highlightTerritory:(Territory*)territory;
 @end
 
 @implementation Map
+
+
+@synthesize size;
+@synthesize gridSize;
+@synthesize selectedTerritory;
 
 
 -(id)initWithMapName:(NSString*)theMapName {
@@ -23,10 +31,13 @@
 	if ((self = [super init])) {
 		
 		name = theMapName;		
-		countries = [[NSMutableDictionary alloc] init];
+		territoryWithColor = [[NSMutableDictionary alloc] init];
+        locationsWithColor = [[NSMutableDictionary alloc] init];
 		size = [[CCDirector sharedDirector] winSize];
 		gridSize.width = (int)(size.width/GRID_SIZE);
 		gridSize.height = (int)(size.height/GRID_SIZE);
+        
+        selectedTerritory = nil;
 
 		//create the hitmap
 		[self createHitMap];
@@ -48,16 +59,16 @@
 	
 	UIImage *hitmapImage = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@/HitMap.png", name]];
 	
-	int hitmapSize = (gridSize.width*gridSize.height);
-	NSLog(@"Hitmap size: %d, Grid size: %d", hitmapSize, GRID_SIZE);
+	int colorAtLocationSize = (gridSize.width*gridSize.height);
+	NSLog(@"colorAtLocation size: %d, Grid size: %d", colorAtLocationSize, GRID_SIZE);
 
 	short UInt32Size = sizeof(UInt32);
 	NSLog(@"Size of UInt32: %d", UInt32Size);
 	
-	hitMap = (UInt32*)malloc(hitmapSize * UInt32Size);
-	memset(hitMap, 0, hitmapSize);
+	colorAtLocation = (UInt32*)malloc(colorAtLocationSize * UInt32Size);
+	memset(colorAtLocation, 0, colorAtLocationSize * UInt32Size);
 	
-	CFDataRef imageData = CGDataProviderCopyData(CGImageGetDataProvider(hitmapImage.CGImage));
+    imageData = CGDataProviderCopyData(CGImageGetDataProvider(hitmapImage.CGImage));
 	const UInt32* pixels = (const UInt32*)CFDataGetBytePtr(imageData);
 	int pixelsSize = size.width * size.height;
 	
@@ -68,9 +79,39 @@
 	int gridX;
 	int gridY;	
 	
-	
+    NSMutableDictionary* colorCountMap = [[NSMutableDictionary alloc] init];
+    
+	NSLog(@"Mapping pixels to colors and territories...");
 	for(int i = 0; i < pixelsSize; i++) {
 		UInt32 pixel = pixels[i];
+        NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
+        
+        //get the number of times this color as been used
+        NSNumber* colorCount = [colorCountMap objectForKey:colorKey];
+        if(colorCount == nil) {
+            colorCount = [NSNumber numberWithInt:0];
+        }
+        colorCount = [NSNumber numberWithInt:([colorCount intValue]+1)];
+        [colorCountMap setObject:colorCount forKey:colorKey];
+        
+        if([colorCount intValue] == 50) {
+            
+            int r = (pixel)&0xFF;
+            int g = (pixel>>8)&0xFF;
+            int b = (pixel>>16)&0xFF;
+            
+            if(r == 0 && g == 0 && b == 255) {
+                //ocean
+            }else {
+                //land!
+                
+                Territory* territory = [[Territory alloc] initWithColor:pixel onMap:self];
+                [territoryWithColor setObject:territory forKey:colorKey];
+                NSLog(@"Added territory for color key %@", colorKey);
+            }
+        }else {
+            
+        }
 		
 		//convert to x,y coords
 		y = (i/size.width);
@@ -84,9 +125,26 @@
 		if(gridX >= gridSize.width) gridX = gridSize.width-1;
 		gridI = (gridY * gridSize.width) + gridX;
 		
-		hitMap[gridI] = pixel;
+		colorAtLocation[gridI] = pixel;        
 	}
-	CFRelease(imageData);
+    
+    NSLog(@"Determining territory pixels...");
+    
+    for(id colorKey in territoryWithColor) {
+        Territory* territory = [territoryWithColor objectForKey:colorKey];
+        UInt32 pixel = [colorKey unsignedIntValue];
+        
+        NSMutableArray* locations = [[NSMutableArray alloc] init];
+
+        for(int i = 0; i < pixelsSize; i++) {
+            if(pixels[i] == pixel) {
+                //this pixel belongs to this territory
+                [locations addObject:[NSNumber numberWithInt:i]];
+            }
+        }
+    
+        [territory setLocations:locations];
+    }
 	
 	NSLog(@"Hitmap created");
 }	
@@ -103,7 +161,7 @@
 	CGPoint gridLocation = [self toGridLocation:location];
 	int index = (int)(gridLocation.y * gridSize.width + gridLocation.x);
 	NSLog(@"Grid location index: %d", index);
-	return hitMap[index];
+	return colorAtLocation[index];
 }
 
 -(CGPoint)locationFromTouch:(UITouch*)touch {
@@ -111,13 +169,13 @@
 	return [[CCDirector sharedDirector] convertToGL:touchLocation];
 }
 
--(Country*)countryAtTouch:(UITouch*)touch {
+-(Territory*)territoryAtTouch:(UITouch*)touch {
 	CGPoint location = [self locationFromTouch:touch];
 	NSLog(@"Touch location %f,%f", location.x, location.y);
-	return [self countryAtLocation:location];
+	return [self territoryAtLocation:location];
 }
 
--(Country*)countryAtLocation:(CGPoint)location {
+-(Territory*)territoryAtLocation:(CGPoint)location {
 	UInt32 color = [self colorAtLocation:location];
 	
 	int r = (color)&0xFF;
@@ -126,22 +184,30 @@
 	int a = (color>>24)&0xFF;
 	
 	NSLog(@"R=%d, G=%d, B=%d, A=%d at location %f,%f", r, g, b, a, location.x, location.y);
-
-	if(r == 0 && g == 0 && b > 0) {
-		[[[UIAlertView alloc] initWithTitle:@"Conquer" message:@"Water!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}else if(r > 200 && g < 100 && b < 100) {
-		[[[UIAlertView alloc] initWithTitle:@"Conquer" message:@"Red!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}else if(r > 100 && b < 100 && g > 100) {
-		[[[UIAlertView alloc] initWithTitle:@"Conquer" message:@"Yellow!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}else if(r > 100 && g == 0 && b > 100) {
-		[[[UIAlertView alloc] initWithTitle:@"Conquer" message:@"Purple!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
 	
-	NSNumber* locationKey = [NSNumber numberWithInt:color];
-	Country* country = [countries objectForKey:locationKey];
-	NSLog(@"Country=%@", country);
+	NSNumber* colorKey = [NSNumber numberWithUnsignedInt:color];
+	Territory* territory = [territoryWithColor objectForKey:colorKey];
+	NSLog(@"Territory=%@", territory);
+    selectedTerritory = territory;
 
-	return country;
+	return territory;
+}
+
+
+
+
+
+
+
+
+
+-(void)dealloc {
+    if(imageData != nil) {
+        CFRelease(imageData);
+    }
+    if(colorAtLocation != nil) {
+        free(colorAtLocation);
+    }
 }
 
 @end

@@ -14,7 +14,8 @@
 		63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */; };
 		63ACAB1C15470D69004E1FF6 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB1B15470D69004E1FF6 /* Maps */; };
 		63ACAB201548BC35004E1FF6 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1F1548BC35004E1FF6 /* Map.m */; };
-		63ACAB231548C359004E1FF6 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Country.m */; };
+		63ACAB231548C359004E1FF6 /* Territory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Territory.m */; };
+		AAFD01FB154A03A400C756FA /* Continent.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFD01FA154A03A400C756FA /* Continent.m */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
 		DC485B4613AA18A600F2BC70 /* libcocosdenshion-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B4513AA18A600F2BC70 /* libcocosdenshion-mac.a */; };
@@ -28,8 +29,6 @@
 		DC65616413A969B600A7AC53 /* libkobold2d-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615813A969B600A7AC53 /* libkobold2d-ios.a */; };
 		DC65616513A969B600A7AC53 /* libobjectal-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615913A969B600A7AC53 /* libobjectal-ios.a */; };
 		DC65616613A969B600A7AC53 /* libsneakyinput-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615A13A969B600A7AC53 /* libsneakyinput-ios.a */; };
-		DC81EAA9141280D400735365 /* TileMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC81EAA8141280D400735365 /* TileMapLayer.m */; };
-		DC81EAAA141280D400735365 /* TileMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC81EAA8141280D400735365 /* TileMapLayer.m */; };
 		DC81EAB9141281CE00735365 /* alien-sfx.caf in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAB141281CE00735365 /* alien-sfx.caf */; };
 		DC81EABA141281CE00735365 /* alien-sfx.caf in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAB141281CE00735365 /* alien-sfx.caf */; };
 		DC81EABB141281CE00735365 /* Author&License.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAD141281CE00735365 /* Author&License.txt */; };
@@ -72,15 +71,17 @@
 		63ACAB041545EEC6004E1FF6 /* GameModeSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeSelectionScene.m; sourceTree = "<group>"; };
 		63ACAB0F1545F308004E1FF6 /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Buttons; sourceTree = "<group>"; };
 		63ACAB11154605BF004E1FF6 /* HUD */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HUD; sourceTree = "<group>"; };
-		63ACAB15154609BD004E1FF6 /* LayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LayerBase.h; sourceTree = "<group>"; };
+		63ACAB15154609BD004E1FF6 /* LayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerBase.h; sourceTree = "<group>"; };
 		63ACAB16154609BD004E1FF6 /* LayerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerBase.m; sourceTree = "<group>"; };
 		63ACAB1815460AD0004E1FF6 /* SinglePlayerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerScene.h; sourceTree = "<group>"; };
 		63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerScene.m; sourceTree = "<group>"; };
 		63ACAB1B15470D69004E1FF6 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 		63ACAB1E1548BC35004E1FF6 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		63ACAB1F1548BC35004E1FF6 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-		63ACAB211548C359004E1FF6 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
-		63ACAB221548C359004E1FF6 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		63ACAB211548C359004E1FF6 /* Territory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Territory.h; sourceTree = "<group>"; };
+		63ACAB221548C359004E1FF6 /* Territory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Territory.m; sourceTree = "<group>"; };
+		AAFD01F9154A03A400C756FA /* Continent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continent.h; sourceTree = "<group>"; };
+		AAFD01FA154A03A400C756FA /* Continent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Continent.m; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
 		DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libbox2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,8 +96,6 @@
 		DC65615813A969B600A7AC53 /* libkobold2d-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC65615913A969B600A7AC53 /* libobjectal-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libobjectal-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC65615A13A969B600A7AC53 /* libsneakyinput-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libsneakyinput-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC81EAA7141280D400735365 /* TileMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMapLayer.h; sourceTree = "<group>"; };
-		DC81EAA8141280D400735365 /* TileMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileMapLayer.m; sourceTree = "<group>"; };
 		DC81EAAB141281CE00735365 /* alien-sfx.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "alien-sfx.caf"; sourceTree = "<group>"; };
 		DC81EAAD141281CE00735365 /* Author&License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Author&License.txt"; sourceTree = "<group>"; };
 		DC81EAAE141281CE00735365 /* dg_grounds32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dg_grounds32.png; sourceTree = "<group>"; };
@@ -197,8 +196,6 @@
 			children = (
 				63ACAB1815460AD0004E1FF6 /* SinglePlayerScene.h */,
 				63ACAB1915460AD0004E1FF6 /* SinglePlayerScene.m */,
-				DC81EAA7141280D400735365 /* TileMapLayer.h */,
-				DC81EAA8141280D400735365 /* TileMapLayer.m */,
 			);
 			name = SinglePlayer;
 			sourceTree = "<group>";
@@ -208,8 +205,10 @@
 			children = (
 				63ACAB1E1548BC35004E1FF6 /* Map.h */,
 				63ACAB1F1548BC35004E1FF6 /* Map.m */,
-				63ACAB211548C359004E1FF6 /* Country.h */,
-				63ACAB221548C359004E1FF6 /* Country.m */,
+				63ACAB211548C359004E1FF6 /* Territory.h */,
+				63ACAB221548C359004E1FF6 /* Territory.m */,
+				AAFD01F9154A03A400C756FA /* Continent.h */,
+				AAFD01FA154A03A400C756FA /* Continent.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -474,12 +473,12 @@
 			files = (
 				DCC1A3A913A94F1A005BD75D /* AppDelegate.m in Sources */,
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,
-				DC81EAA9141280D400735365 /* TileMapLayer.m in Sources */,
 				63ACAB051545EEC6004E1FF6 /* GameModeSelectionScene.m in Sources */,
 				63ACAB17154609BD004E1FF6 /* LayerBase.m in Sources */,
 				63ACAB1A15460AD0004E1FF6 /* SinglePlayerScene.m in Sources */,
 				63ACAB201548BC35004E1FF6 /* Map.m in Sources */,
-				63ACAB231548C359004E1FF6 /* Country.m in Sources */,
+				63ACAB231548C359004E1FF6 /* Territory.m in Sources */,
+				AAFD01FB154A03A400C756FA /* Continent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,7 +488,6 @@
 			files = (
 				DCC1A3AA13A94F1A005BD75D /* AppDelegate.m in Sources */,
 				DCC1A3AE13A94F1A005BD75D /* main.m in Sources */,
-				DC81EAAA141280D400735365 /* TileMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

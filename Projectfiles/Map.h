@@ -11,7 +11,7 @@
 
 #define GRID_SIZE 1
 
-@class Country;
+@class Territory;
 
 @interface Map : NSObject {
     
@@ -19,15 +19,24 @@
 	CGSize size;
 	CGSize gridSize;
 
-	UInt32* hitMap;
-	NSMutableDictionary* countries;
+    CFDataRef imageData;
+	UInt32* colorAtLocation;
+    NSMutableDictionary* locationsWithColor;
+	NSMutableDictionary* territoryWithColor;
 	
+    Territory* selectedTerritory;
+    
 	CCSprite* displayNode;
 }
 
 -(id)initWithMapName:(NSString*)theMapName;
 -(CCNode*)displayNode;
--(Country*)countryAtLocation:(CGPoint)location;
--(Country*)countryAtTouch:(UITouch*)touch;
+-(Territory*)territoryAtLocation:(CGPoint)location;
+-(Territory*)territoryAtTouch:(UITouch*)touch;
+
+
+@property (nonatomic) CGSize size;
+@property (nonatomic) CGSize gridSize;
+@property (strong, nonatomic) Territory* selectedTerritory;
 
 @end

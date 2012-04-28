@@ -8,9 +8,7 @@
 
 #import "SinglePlayerScene.h"
 #import "Map.h"
-
-#import "TileMapLayer.h"
-
+#import "Territory.h"
 
 @implementation SinglePlayerScene
 
@@ -56,8 +54,14 @@
 {
 	NSLog(@"touch began!");
 	// get the position in tile coordinates from the touch location
-	[map countryAtTouch:[touches anyObject]];
+	[map territoryAtTouch:[touches anyObject]];
 }
 
+-(void) draw
+{
+    if([map selectedTerritory] != nil) {
+        [[map selectedTerritory] highlight];
+    }
+}
 
 @end
