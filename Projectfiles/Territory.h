@@ -14,9 +14,12 @@
 @interface Territory : NSObject {
     
     Map* map;
-    NSArray* locations;
-	CGPoint center;
 	UInt32 color;
+
+    
+    NSArray* locations;
+	NSArray* borderLocations;
+    CGPoint center;
 	
 }
 
@@ -24,6 +27,7 @@
 -(void)setLocations:(NSArray*)theLocations;
 
 -(NSArray*)locations;
+-(NSArray*)borderLocations;
 
 -(void)highlight;
     

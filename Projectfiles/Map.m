@@ -6,6 +6,7 @@
 //  Copyright 2012 Conquer, LLC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "Map.h"
 #import "Territory.h"
 #import "Continent.h"
@@ -70,7 +71,7 @@
 	
     imageData = CGDataProviderCopyData(CGImageGetDataProvider(hitmapImage.CGImage));
 	const UInt32* pixels = (const UInt32*)CFDataGetBytePtr(imageData);
-	int pixelsSize = size.width * size.height;
+	int pixelsSize = hitmapImage.size.width * hitmapImage.size.height;
 	
 	int gridI;
 	int y;
@@ -107,7 +108,9 @@
                 
                 Territory* territory = [[Territory alloc] initWithColor:pixel onMap:self];
                 [territoryWithColor setObject:territory forKey:colorKey];
-                NSLog(@"Added territory for color key %@", colorKey);
+                if(DEBUG_MODE) {
+                    NSLog(@"Added territory for color key %@", colorKey);
+                }
             }
         }else {
             

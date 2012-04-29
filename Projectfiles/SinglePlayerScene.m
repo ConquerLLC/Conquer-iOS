@@ -22,7 +22,7 @@
 		
 		CCSprite* mapBackground = [CCSprite spriteWithFile:@"Maps/Background.png"];
 		mapBackground.position = ccp(winSize.width/2, winSize.height/2);
-		[self addChild:mapBackground z:-1];
+		[self addChild:mapBackground z:-10];
 		
 		CCSprite* hud = [CCSprite spriteWithFile:@"HUD/SinglePlayer.png"];
 		hud.position = ccp(winSize.width/2, winSize.height/2);
@@ -30,7 +30,7 @@
 		
 		
 		map = [[Map alloc] initWithMapName:@"WorldMap1"];
-		[self addChild:[map displayNode] z:0];
+		[self addChild:[map displayNode] z:-1];
 		
 		
 		
