@@ -17,6 +17,7 @@
 		63ACAB231548C359004E1FF6 /* Territory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Territory.m */; };
 		AA37CC40154F281F00CE7835 /* NSMutableArray_Shuffling.m in Sources */ = {isa = PBXBuildFile; fileRef = AA37CC3F154F281F00CE7835 /* NSMutableArray_Shuffling.m */; };
 		AA3B0379154F37BF0000D6A7 /* UIColor_ColorFromUInt32.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3B0378154F37BF0000D6A7 /* UIColor_ColorFromUInt32.m */; };
+		AA3B037D154F5C940000D6A7 /* ComputerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3B037C154F5C940000D6A7 /* ComputerPlayer.m */; };
 		AAB64760154DE34500E1BCD5 /* CGImageInspection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */; };
 		AAB647A6154E202900E1BCD5 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6478F154E202900E1BCD5 /* CDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAB647A7154E202900E1BCD5 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB64792154E202900E1BCD5 /* CFilteringJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -86,8 +87,10 @@
 		63ACAB221548C359004E1FF6 /* Territory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Territory.m; sourceTree = "<group>"; };
 		AA37CC3E154F281F00CE7835 /* NSMutableArray_Shuffling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArray_Shuffling.h; sourceTree = "<group>"; };
 		AA37CC3F154F281F00CE7835 /* NSMutableArray_Shuffling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableArray_Shuffling.m; sourceTree = "<group>"; };
-		AA3B0377154F37BF0000D6A7 /* UIColor_ColorFromUInt32.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UIColor_ColorFromUInt32.h; sourceTree = "<group>"; };
+		AA3B0377154F37BF0000D6A7 /* UIColor_ColorFromUInt32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor_ColorFromUInt32.h; sourceTree = "<group>"; };
 		AA3B0378154F37BF0000D6A7 /* UIColor_ColorFromUInt32.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor_ColorFromUInt32.m; sourceTree = "<group>"; };
+		AA3B037B154F5C940000D6A7 /* ComputerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComputerPlayer.h; sourceTree = "<group>"; };
+		AA3B037C154F5C940000D6A7 /* ComputerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComputerPlayer.m; sourceTree = "<group>"; };
 		AAB6475C154C81C800E1BCD5 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		AAB6475E154DE34500E1BCD5 /* CGImageInspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGImageInspection.h; sourceTree = "<group>"; };
 		AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGImageInspection.m; sourceTree = "<group>"; };
@@ -322,6 +325,8 @@
 				AAB647B4154E2BEC00E1BCD5 /* HumanPlayer.h */,
 				AAB647B5154E2BEC00E1BCD5 /* HumanPlayer.m */,
 				AAB647B7154E306000E1BCD5 /* PlayerProtocol.h */,
+				AA3B037B154F5C940000D6A7 /* ComputerPlayer.h */,
+				AA3B037C154F5C940000D6A7 /* ComputerPlayer.m */,
 			);
 			name = Players;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				AAB647BB154E39F600E1BCD5 /* GameWonScene.m in Sources */,
 				AA37CC40154F281F00CE7835 /* NSMutableArray_Shuffling.m in Sources */,
 				AA3B0379154F37BF0000D6A7 /* UIColor_ColorFromUInt32.m in Sources */,
+				AA3B037D154F5C940000D6A7 /* ComputerPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

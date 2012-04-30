@@ -1,0 +1,93 @@
+//
+//  ComputerPlayer.m
+//  Conquer
+//
+//  Created by Stephen Johnson on 4/30/12.
+//  Copyright (c) 2012 Conquer, LLC. All rights reserved.
+//
+
+#import "ComputerPlayer.h"
+#import "Territory.h"
+
+@implementation ComputerPlayer
+
+-(id)initWithName:(NSString*)theName andColor:(UInt32)theColor {
+	
+	if ((self = [super initWithName:theName andColor:theColor])) {
+        NSLog(@"New computer player created with name=%@ and color=%lu", name, color);
+    }
+    
+    return self;
+}
+
+-(void)touchedTerritory:(Territory*)territory {
+    [super touchedTerritory:territory];
+    
+    if(state == STATE_PLACING) {
+        if(originTerritory == nil) {
+            return;
+        }
+        if(armiesToPlace > 0) {
+            originTerritory.armies++;
+            armiesToPlace--;
+            NSLog(@"%@ placed unit on territory %@. %@ has %d units to place. %@ has %d units", name, originTerritory.name, name, armiesToPlace, originTerritory.name, originTerritory.armies);
+            if(armiesToPlace > 0) {
+                stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
+            }else {
+                [self endState];
+            }
+        }else {
+            [self endState];
+        }
+    }else if(state == STATE_ATTACKING) {
+        if(originTerritory == nil || destinationTerritory == nil) {
+            return;
+        }
+        
+        NSLog(@"%@ chose to attack %@ from %@", name, destinationTerritory.name, originTerritory.name);
+        //TODO: ATTACK!!!!
+        if([originTerritory attack:destinationTerritory]) {
+            //attack successful - territory conquered
+        }else {
+            //attack failed - territory not conquered
+        }
+        
+        
+    }else if(state == STATE_FORTIFYING) {
+        if(originTerritory == nil || destinationTerritory == nil) {
+            return;
+        }
+        
+        //TODO: FORTIFY!!!
+        
+        
+    }
+}
+
+-(void)place {
+    NSLog(@"%@ is placing armies", name);
+    
+    if(armiesToPlace > 0) {
+        stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
+    }else {
+        [self endState];
+    }
+    
+}
+
+-(void)attack {
+    NSLog(@"%@ is attacking", name);
+    
+    stateDescription = [NSString stringWithFormat:@"Attacking"];
+    
+}
+
+-(void)fortify {
+    NSLog(@"%@ is fortifying", name);
+    
+    
+    [self endState];
+}
+
+
+@end

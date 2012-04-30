@@ -12,6 +12,7 @@
 #import "Territory.h"
 #import "Player.h"
 #import "HumanPlayer.h"
+#import "ComputerPlayer.h"
 #import "GameWonScene.h"
 
 #import "UIColor_ColorFromUInt32.h"
@@ -65,7 +66,7 @@
         //create the players
 		players = [[NSMutableArray alloc] init];
         [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:(255) + (0<<8) + (0<<16) + (255<<24)]];
-        [players addObject:[[HumanPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24)]];
+        [players addObject:[[ComputerPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24)]];
         currentPlayerIndex = 0;
 
         //assign territories to players randomly
