@@ -37,7 +37,7 @@
 		name = theMapName;
         size = [[CCDirector sharedDirector] winSize];
 
-        continents = [[NSMutableArray alloc] init];
+        continents = [[NSMutableDictionary alloc] init];
 		territoryWithColor = [[NSMutableDictionary alloc] init];
         locationsWithColor = [[NSMutableDictionary alloc] init];
         
@@ -67,6 +67,19 @@
         NSLog(@"Failed to map properties file. Error=%@", error);
     }
     NSDictionary* territoryInfoMap = [properties objectForKey:@"Territories"];
+    NSDictionary* continentInfoMap = [properties objectForKey:@"Continents"];
+    NSMutableDictionary* continentToTerritoryNamesMap = [[NSMutableDictionary alloc] init];
+    
+    for(id key in continentInfoMap) {
+        NSDictionary* continentInfo = [continentInfoMap objectForKey:key];
+        NSString* continentName = ((NSString*)key);
+        int armiesPerTurn = [(NSString*)([continentInfo objectForKey:@"ArmiesPerTurn"]) intValue];
+        NSArray* territories = (NSArray*)([continentInfo objectForKey:@"Territories"]);
+        
+        Continent* continent = [[Continent alloc] initWithName:continentName armiesPerTurn:armiesPerTurn onMap:self];
+        [continents setObject:continent forKey:continentName];
+        [continentToTerritoryNamesMap setObject:territories forKey:continent.name];
+    }
     
     NSLog(@"Creating hitmap");
 	
@@ -124,7 +137,21 @@
                         //NSLog(@"props: %d, %d, %d", aRed, aBlue, aGreen);
                     }
                     
-                    territory = [[Territory alloc] initWithColor:pixel name:territoryName onMap:self];
+                    //TODO: TERRITORIES AND CONTINENTS NEED TO BE LINKED
+                    
+                    Continent* continent = nil;
+                    for(id key in continents) {
+                        Continent* aContinent = [continents objectForKey:key];
+                        for(NSString* aTerritoryName in [continentToTerritoryNamesMap objectForKey:aContinent.name]) {
+                            if([aTerritoryName isEqualToString:territoryName]) {
+                                continent = aContinent;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    territory = [[Territory alloc] initWithColor:pixel name:territoryName onContinent:continent onMap:self];
+                    [continent addTerritory:territory];
                     [territoryWithColor setObject:territory forKey:colorKey];
                     if(DEBUG_MODE) {
                         NSLog(@"Added territory %@ for color key %@", territory.name, colorKey);

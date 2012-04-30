@@ -8,6 +8,7 @@
 
 #import "Territory.h"
 #import "Map.h"
+#import "Continent.h"
 #import "cocos2d.h"
 
 
@@ -16,14 +17,16 @@
 @synthesize name;
 @synthesize center;
 
--(id)initWithColor:(UInt32)theColor name:(NSString*)theName onMap:(Map*)theMap {
+-(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap {
 	
 	if((self = [super init])) {
 		color = theColor;
         name = theName;
         map = theMap;
+        continent = theContinent;
         locations = [[NSArray alloc] init];
         borderLocations = [[NSArray alloc] init];
+        NSLog(@"Created territory %@ on continent %@", name, continent.name);
 	}
 	return self;
 }
@@ -101,7 +104,7 @@
 
 -(void)dealloc {
     
-    NSLog(@"Map deallocated");
+    NSLog(@"Territory %@ deallocated", name);
 }
 
 @end

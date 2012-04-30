@@ -10,10 +10,8 @@
 
 @implementation LayerBase
 
--(id) init
-{
-	if ((self = [super init]))
-	{
+-(id) init {
+	if ((self = [super init])) {
 
 	}
 	

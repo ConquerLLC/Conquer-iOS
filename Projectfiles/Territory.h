@@ -10,10 +10,12 @@
 #import "cocos2d.h"
 
 @class Map;
+@class Continent;
 
 @interface Territory : NSObject {
     
     Map* map;
+    Continent* continent;
     NSString* name;
 	UInt32 color;
 
@@ -24,7 +26,7 @@
 	
 }
 
--(id)initWithColor:(UInt32)theColor name:(NSString*)theName onMap:(Map*)theMap;
+-(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap;
 -(void)setLocations:(NSArray*)theLocations;
 
 -(NSArray*)locations;

@@ -11,10 +11,8 @@
 
 @implementation GameWonScene
 
--(id) init
-{
-	if ((self = [super init]))
-	{
+-(id) init {
+	if ((self = [super init])) {
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 
         
