@@ -12,6 +12,8 @@
            alpha: (UInt8 *) alpha 
            pixel: (UInt32 *) pixel;
 
+- (UInt32) colorAt: (CGPoint) location;
+
 -(void) cleanup;
 
 @end

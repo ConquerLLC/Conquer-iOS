@@ -97,6 +97,15 @@
     *pixel = ((*red)) + ((*green)<<8) + ((*blue)<<16) + ((*alpha)<<24);
 }
 
+- (UInt32) colorAt: (CGPoint) location {
+    int yy = (int) location.y ;
+    int xx = (int) location.x ;
+    
+    int byteIndex = (bytesPerRow * yy) + xx * bytesPerPixel ;
+    
+    return *((UInt32*)(self.pixels+byteIndex));
+}
+
 
 -(void) cleanup {
     if (self.context) {

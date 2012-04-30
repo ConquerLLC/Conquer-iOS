@@ -26,20 +26,20 @@
 
 
 @synthesize size;
-@synthesize gridSize;
 @synthesize properties;
+@synthesize continents;
 
 
 -(id)initWithMapName:(NSString*)theMapName {
 	
 	if ((self = [super init])) {
 		
-		name = theMapName;		
+		name = theMapName;
+        size = [[CCDirector sharedDirector] winSize];
+
+        continents = [[NSMutableArray alloc] init];
 		territoryWithColor = [[NSMutableDictionary alloc] init];
         locationsWithColor = [[NSMutableDictionary alloc] init];
-		size = [[CCDirector sharedDirector] winSize];
-		gridSize.width = (int)(size.width/GRID_SIZE);
-		gridSize.height = (int)(size.height/GRID_SIZE);
         
 		//create the hitmap and load map properties
 		[self initializeMapData];
@@ -71,15 +71,6 @@
     NSLog(@"Creating hitmap");
 	
 	UIImage *hitmapImage = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@/HitMap.png", name]];
-	
-	int colorAtLocationSize = (gridSize.width*gridSize.height);
-	NSLog(@"colorAtLocation size: %d, Grid size: %d", colorAtLocationSize, GRID_SIZE);
-
-	short UInt32Size = sizeof(UInt32);
-	NSLog(@"Size of UInt32: %d", UInt32Size);
-	
-	colorAtLocation = (UInt32*)malloc(colorAtLocationSize * UInt32Size);
-	memset(colorAtLocation, 0, colorAtLocationSize * UInt32Size);
     
     imageInspector = [CGImageInspection imageInspectionWithCGImage:hitmapImage.CGImage];
 	
@@ -88,38 +79,26 @@
     UInt8 green;
     UInt8 blue;
     UInt8 alpha;
-    
-	int gridI;
-	int gridX;
-	int gridY;	
-	
-    NSMutableDictionary* colorCountMap = [[NSMutableDictionary alloc] init];
-    
-    int pixelCount = size.width*size.height;
-	NSLog(@"Mapping pixels to colors and territories (examining %d pixels)...", pixelCount);
-	for(int x = 0; x < size.width; x++) {
-        for(int y = 0; y < size.height; y++) {
+        
+	NSLog(@"Mapping pixels to colors and territories");
+	for(int x = 0; x < size.width; x+=5) {
+        for(int y = 0; y < size.height; y+=5) {
             
-            [imageInspector colorAt:(CGPoint){x, size.height-y} 
-                                red:&red 
-                                green:&green 
-                                blue:&blue 
-                                alpha:&alpha 
-                                pixel:&pixel];  
-           
-            //NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
-            
+            //get the aggregate pixel value (fast)
+            pixel = [imageInspector colorAt:(CGPoint){x, size.height-1-y}];  
+                       
             NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
-            
-            //get the number of times this color as been used
-            NSNumber* colorCount = [colorCountMap objectForKey:colorKey];
-            if(colorCount == nil) {
-                colorCount = [NSNumber numberWithInt:0];
-            }
-            colorCount = [NSNumber numberWithInt:([colorCount intValue]+1)];
-            [colorCountMap setObject:colorCount forKey:colorKey];
-            
-            if([colorCount intValue] == 500) {
+            Territory* territory = [territoryWithColor objectForKey:colorKey];
+
+            if(territory == nil) {
+                
+                //get the RGB values
+                [imageInspector colorAt:(CGPoint){x, size.height-1-y} 
+                                    red:&red 
+                                  green:&green 
+                                   blue:&blue 
+                                  alpha:&alpha 
+                                  pixel:&pixel];
                 
                 if(red == 0 && green == 0 && blue == 255) {
                     //ocean
@@ -145,7 +124,7 @@
                         //NSLog(@"props: %d, %d, %d", aRed, aBlue, aGreen);
                     }
                     
-                    Territory* territory = [[Territory alloc] initWithColor:pixel name:territoryName onMap:self];
+                    territory = [[Territory alloc] initWithColor:pixel name:territoryName onMap:self];
                     [territoryWithColor setObject:territory forKey:colorKey];
                     if(DEBUG_MODE) {
                         NSLog(@"Added territory %@ for color key %@", territory.name, colorKey);
@@ -154,15 +133,6 @@
             }else {
                 
             }
-            
-            //map to grid coords
-            gridX = x/GRID_SIZE;
-            gridY = y/GRID_SIZE;
-            if(gridY >= gridSize.height) gridY = gridSize.height-1;
-            if(gridX >= gridSize.width) gridX = gridSize.width-1;
-            gridI = (gridY * gridSize.width) + gridX;
-            
-            colorAtLocation[gridI] = pixel;   
         }
 	}
     
@@ -174,19 +144,14 @@
         
         NSMutableArray* locations = [[NSMutableArray alloc] init];
 
-        for(int x = 0; x < size.width; x++) {
-            for(int y = 0; y < size.height; y++) {
+        for(int x = 0; x < size.width; x+=3) {
+            for(int y = 0; y < size.height; y+=3) {
                 
-                [imageInspector colorAt:(CGPoint){x, size.height-y} 
-                                    red:&red 
-                                  green:&green 
-                                   blue:&blue 
-                                  alpha:&alpha 
-                                  pixel:&pixel];  
+                pixel = [imageInspector colorAt:(CGPoint){x, size.height-1-y}];  
                 
                 if(territoryColor == pixel) {
                     //this pixel belongs to this territory
-                    [locations addObject:[NSNumber numberWithInt:((size.height-y)*size.width + x)]];
+                    [locations addObject:[NSNumber numberWithInt:((size.height-1-y)*size.width + x)]];
                 }
             }
         }
@@ -199,19 +164,8 @@
     
 }	
 
--(CGPoint)toGridLocation:(CGPoint)location {
-	CGPoint gridLocation;
-	gridLocation.x = (int)(location.x/GRID_SIZE);
-	gridLocation.y = (int)(location.y/GRID_SIZE);
-	NSLog(@"Converted %f,%f to grid %f,%f", location.x, location.y, gridLocation.x, gridLocation.y);
-	return gridLocation;
-}
-
 -(UInt32)colorAtLocation:(CGPoint)location {
-	CGPoint gridLocation = [self toGridLocation:location];
-	int index = (int)(gridLocation.y * gridSize.width + gridLocation.x);
-	NSLog(@"Grid location index: %d", index);
-	return colorAtLocation[index];
+	return [imageInspector colorAt:(CGPoint){location.x, size.height-1-location.y}];
 }
 
 -(CGPoint)locationFromTouch:(UITouch*)touch {
@@ -221,21 +175,27 @@
 
 -(Territory*)territoryAtTouch:(UITouch*)touch {
 	CGPoint location = [self locationFromTouch:touch];
-	NSLog(@"Touch location %f,%f", location.x, location.y);
 	return [self territoryAtLocation:location];
 }
 
 -(Territory*)territoryAtLocation:(CGPoint)location {
-	UInt32 color = [self colorAtLocation:location];
 	
-	int r = (color)&0xFF;
-	int g = (color>>8)&0xFF;
-	int b = (color>>16)&0xFF;
-	int a = (color>>24)&0xFF;
+    UInt32 pixel;
+    UInt8 red;
+    UInt8 green;
+    UInt8 blue;
+    UInt8 alpha;
+    
+	[imageInspector colorAt:(CGPoint){location.x, size.height-1-location.y} 
+                        red:&red 
+                      green:&green 
+                       blue:&blue 
+                      alpha:&alpha 
+                      pixel:&pixel];
+    
+	NSLog(@"R=%d, G=%d, B=%d, A=%d at location %d,%d", red, green, blue, alpha, (int)location.x, (int)location.y);
 	
-	NSLog(@"R=%d, G=%d, B=%d, A=%d at location %f,%f", r, g, b, a, location.x, location.y);
-	
-	NSNumber* colorKey = [NSNumber numberWithUnsignedInt:color];
+	NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
 	Territory* territory = [territoryWithColor objectForKey:colorKey];
 	NSLog(@"Territory=%@", territory.name);
 
@@ -248,9 +208,6 @@
 
 
 -(void) cleanup {
-    if(colorAtLocation != nil) {
-        free(colorAtLocation);
-    }
     if(imageInspector != nil) {
         [imageInspector cleanup];
     }

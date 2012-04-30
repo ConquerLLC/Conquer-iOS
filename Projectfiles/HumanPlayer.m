@@ -23,7 +23,7 @@
     NSLog(@"%@ is placing armies", name);
 
     
-    [self endTurn];
+    //[self endTurn];
 }
 
 -(void)attack {

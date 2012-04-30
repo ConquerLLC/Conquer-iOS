@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define GRID_SIZE 1
-
 @class Territory;
 @class CGImageInspection;
 
@@ -18,14 +16,14 @@
     
 	NSString* name;
 	CGSize size;
-	CGSize gridSize;
 
     CGImageInspection* imageInspector;
-	UInt32* colorAtLocation;
+    
+    NSMutableArray* continents;
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
     NSDictionary* properties;
-	    
+    
 	CCSprite* displayNode;
 }
 
@@ -38,7 +36,7 @@
 
 
 @property (nonatomic) CGSize size;
-@property (nonatomic) CGSize gridSize;
 @property (strong, nonatomic) NSDictionary* properties;
+@property (strong, nonatomic) NSMutableArray* continents;
 
 @end
