@@ -20,6 +20,7 @@
     CGImageInspection* imageInspector;
     
     NSMutableDictionary* continents;
+    
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
     NSDictionary* properties;
@@ -31,6 +32,7 @@
 -(CCNode*)displayNode;
 -(Territory*)territoryAtLocation:(CGPoint)location;
 -(Territory*)territoryAtTouch:(UITouch*)touch;
+-(NSArray*)territories;
 
 -(void) cleanup;
 

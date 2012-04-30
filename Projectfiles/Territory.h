@@ -11,6 +11,7 @@
 
 @class Map;
 @class Continent;
+@class Player;
 
 @interface Territory : NSObject {
     
@@ -18,12 +19,15 @@
     Continent* continent;
     NSString* name;
 	UInt32 color;
-
     
     NSArray* locations;
 	NSArray* borderLocations;
     CGPoint center;
 	
+    NSArray* neighboringTerritories;
+    
+    Player* owner;
+    int armies;
 }
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap;
@@ -32,10 +36,16 @@
 -(NSArray*)locations;
 -(NSArray*)borderLocations;
 
--(void)highlight;
+-(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories;
+
+
+-(void)highlight:(UInt32)highlightColor;
     
     
 @property (strong, nonatomic) NSString* name;
 @property (nonatomic) CGPoint center;
+
+@property (strong, nonatomic) Player* owner;
+@property (nonatomic) int armies;
 
 @end

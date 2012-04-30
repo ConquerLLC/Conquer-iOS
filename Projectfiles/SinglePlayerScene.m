@@ -9,8 +9,11 @@
 #import "SinglePlayerScene.h"
 #import "Map.h"
 #import "Territory.h"
+#import "Player.h"
 #import "HumanPlayer.h"
 #import "GameWonScene.h"
+
+#import "NSMutableArray_Shuffling.h"
 
 @implementation SinglePlayerScene
 
@@ -33,6 +36,13 @@
         
         labelOriginTerritory = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
         [hud addChild: labelOriginTerritory];
+        labelCurrentPlayerName = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
+        labelCurrentPlayerName.position = ccp(winSize.width/2, 50);
+        [hud addChild: labelCurrentPlayerName];
+        labelCurrentPlayerState = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
+        labelCurrentPlayerState.position = ccp(winSize.width/2, 20);
+        [hud addChild: labelCurrentPlayerState];
+
 		
         //load the map
 		map = [[Map alloc] initWithMapName:@"Conquer"];
@@ -45,7 +55,15 @@
         currentPlayerIndex = 0;
 		
         
+        uint playerIndex = 0;
+        NSMutableArray* unassignedTerritories = [[NSMutableArray alloc] initWithArray:[map territories]];
+        [unassignedTerritories shuffle];
         
+        //assign territories to players randomly
+        for(Territory* unassignedTerritory in unassignedTerritories) {
+            unassignedTerritory.owner = [players objectAtIndex:playerIndex];
+            playerIndex = (playerIndex+1)%[players count];
+        }
         
 
         //start the game!
@@ -139,22 +157,49 @@
 
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	// get the position in tile coordinates from the touch location
+	
+    // get the position in tile coordinates from the touch location
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
-	currentPlayer.originTerritory = [map territoryAtTouch:[touches anyObject]];
+    Territory* touchedTerritory = [map territoryAtTouch:[touches anyObject]];
+    
+    if(touchedTerritory == nil) {
+        //water touched
+        currentPlayer.originTerritory = nil;
+        currentPlayer.destinationTerritory = nil;
+        
+    }else {
+        //land touched
+        [currentPlayer touchedTerritory: touchedTerritory];
+    }
 }
 
 -(void) draw {
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+    
+    //highlight owned territories
+    for(Territory* territory in [map territories]) {
+        if(territory.owner == currentPlayer) {
+            [territory highlight:(100) + (100<<8) + (0<<16) + (255<<24)];
+        }
+    }
+    
+    
+    
     if(currentPlayer.originTerritory != nil) {
-        [currentPlayer.originTerritory highlight];
+        [currentPlayer.originTerritory highlight:(0) + (255<<8) + (0<<16) + (255<<24)];
         
         labelOriginTerritory.visible = true;
         [labelOriginTerritory setString:currentPlayer.originTerritory.name];
         labelOriginTerritory.position = (CGPoint){currentPlayer.originTerritory.center.x, currentPlayer.originTerritory.center.y};
+
     }else {
         labelOriginTerritory.visible = false;
     }
+    
+    
+    
+    [labelCurrentPlayerName setString:currentPlayer.name];
+    [labelCurrentPlayerState setString:currentPlayer.stateName];
 }
 
 @end

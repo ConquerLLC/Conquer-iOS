@@ -17,6 +17,8 @@
 	Map* map;
     
     CCLabelTTF* labelOriginTerritory;
+    CCLabelTTF* labelCurrentPlayerName;
+    CCLabelTTF* labelCurrentPlayerState;
     
     
     NSMutableArray* players;

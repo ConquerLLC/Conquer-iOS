@@ -7,6 +7,7 @@
 //
 
 #import "Player.h"
+#import "Territory.h"
 
 @implementation Player
 
@@ -54,7 +55,78 @@
     NSLog(@"%@ finished turn", name);
 }
 
+-(void)touchedTerritory:(Territory*)territory {
+    if(territory.owner == self) {
+        //territory IS owned
 
+        if(state == STATE_ATTACKING) {
+            //if we're attacking then this must be the the origin
+            originTerritory = territory;
+            destinationTerritory = nil;
+        }else if(state == STATE_PLACING) {
+            //if we're placing then only the origin matters
+            originTerritory = territory;
+            destinationTerritory = nil;
+        }else if(state == STATE_FORTIFYING) {
+            //if we're fortifying then both are owned by the player
+            if(originTerritory != nil) {
+                if(destinationTerritory == nil) {
+                    destinationTerritory = territory;
+                }else {
+                    originTerritory = territory;
+                }
+            }else {
+                originTerritory = territory;
+            }
+        }
+    }else {
+        //territory is NOT owned
+        
+        if(state == STATE_ATTACKING) {
+            //if we're attacking then the origin must be set
+            if(originTerritory != nil) {
+                destinationTerritory = territory;
+            }else {
+                originTerritory = nil;
+                destinationTerritory = nil;
+            }
+        }else if(state == STATE_PLACING) {
+            //if we're placing then this is an invalid touch
+            originTerritory = nil;
+            destinationTerritory = nil;
+        }else if(state == STATE_FORTIFYING) {
+            //if we're fortifying then this is an invalid touch
+            originTerritory = nil;
+            destinationTerritory = nil;            
+        }
+    }
+}
+
+-(NSString*)stateName {
+    if(state == STATE_IDLE) {
+        return @"Idle";
+    }else if(state == STATE_PLACING) {
+        return @"Placing";
+    }else if(state == STATE_HAS_PLACED) {
+        return @"Has Placed";
+    }else if(state == STATE_ATTACKING) {
+        return @"Attacking";
+    }else if(state == STATE_HAS_ATTACKED) {
+        return @"Has Attacked";
+    }else if(state == STATE_FORTIFYING) {
+        return @"Fortifying";
+    }else if(state == STATE_HAS_FORTIFIED) {
+        return @"Has Fortified";
+    }else if(state == STATE_GAME_NOT_STARTED) {
+        return @"Game Not Yet Started";
+    }else if(state == STATE_GAME_WON) {
+        return @"Game Won";
+    }else if(state == STATE_GAME_LOST) {
+        return @"Game Lost";
+    }else {
+        return @"Unknown";
+    }
+}
 
 -(void)dealloc {
     

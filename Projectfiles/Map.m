@@ -56,6 +56,14 @@
 	return displayNode;
 }
 
+-(NSArray*)territories {
+    NSMutableArray* territoriesArray = [[NSMutableArray alloc] init];
+    for(id key in territoryWithColor) {
+        [territoriesArray addObject:[territoryWithColor objectForKey:key]];
+    }
+    return territoriesArray;
+}
+
 -(void)initializeMapData {
 	
     NSLog(@"Loading map properties");
@@ -118,11 +126,13 @@
                 }else {
                     //land!
                     
-                    NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
-                    
+                    if(DEBUG_MODE) {
+                        NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
+                    }
                     
                     
                     NSString* territoryName = @"!UNKNOWN!";
+                    NSArray* neighboringTerritories = nil;
                     for(id key in territoryInfoMap) {
                         NSDictionary* territoryInfo = [territoryInfoMap objectForKey:key];
                         int aRed = [(NSString*)([territoryInfo objectForKey:@"Red"]) intValue];
@@ -131,14 +141,13 @@
                         
                         if(aRed == red && aBlue == blue && aGreen == green) {
                             territoryName = ((NSString*)key);
+                            neighboringTerritories = (NSArray*)([territoryInfo objectForKey:@"Neighbors"]);
                             break;
                         }
                         
                         //NSLog(@"props: %d, %d, %d", aRed, aBlue, aGreen);
                     }
-                    
-                    //TODO: TERRITORIES AND CONTINENTS NEED TO BE LINKED
-                    
+                                        
                     Continent* continent = nil;
                     for(id key in continents) {
                         Continent* aContinent = [continents objectForKey:key];
@@ -151,8 +160,14 @@
                     }
                     
                     territory = [[Territory alloc] initWithColor:pixel name:territoryName onContinent:continent onMap:self];
+                    if(neighboringTerritories != nil) {
+                        [territory setNeighboringTerritories:neighboringTerritories];
+                    }
+                    
                     [continent addTerritory:territory];
+                    
                     [territoryWithColor setObject:territory forKey:colorKey];
+                    
                     if(DEBUG_MODE) {
                         NSLog(@"Added territory %@ for color key %@", territory.name, colorKey);
                     }
@@ -220,12 +235,17 @@
                       alpha:&alpha 
                       pixel:&pixel];
     
-	NSLog(@"R=%d, G=%d, B=%d, A=%d at location %d,%d", red, green, blue, alpha, (int)location.x, (int)location.y);
-	
+    if(DEBUG_MODE) {
+        NSLog(@"R=%d, G=%d, B=%d, A=%d at location %d,%d", red, green, blue, alpha, (int)location.x, (int)location.y);
+	}
+    
 	NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
 	Territory* territory = [territoryWithColor objectForKey:colorKey];
-	NSLog(@"Territory=%@", territory.name);
-
+    
+    if(DEBUG_MODE) {
+        NSLog(@"Territory=%@", territory.name);
+    }
+    
 	return territory;
 }
 

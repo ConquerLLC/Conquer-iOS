@@ -32,14 +32,16 @@
     
     Territory* originTerritory;
     Territory* destinationTerritory;
-    
+        
     ushort state;
     ushort lastState;
-
 }
 
 -(id)initWithName:(NSString*)theName andColor:(UInt32)theColor;
 
+-(void)touchedTerritory:(Territory*)territory;
+
+-(NSString*)stateName;
 
 @property (strong, nonatomic) NSString* name;
 @property (nonatomic) UInt32 color;

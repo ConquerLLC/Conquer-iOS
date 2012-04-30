@@ -9,6 +9,7 @@
 #import "Territory.h"
 #import "Map.h"
 #import "Continent.h"
+#import "Player.h"
 #import "cocos2d.h"
 
 
@@ -16,6 +17,8 @@
 
 @synthesize name;
 @synthesize center;
+@synthesize owner;
+@synthesize armies;
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap {
 	
@@ -26,9 +29,15 @@
         continent = theContinent;
         locations = [[NSArray alloc] init];
         borderLocations = [[NSArray alloc] init];
+        neighboringTerritories = [[NSArray alloc] init];
+        owner = nil;
         NSLog(@"Created territory %@ on continent %@", name, continent.name);
 	}
 	return self;
+}
+
+-(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories {
+    neighboringTerritories = theNeighboringTerritories;
 }
 
 -(void)setLocations:(NSArray*)theLocations {
@@ -69,10 +78,14 @@
 }
 
 
--(void)highlight {
+-(void)highlight:(UInt32)highlightColor {
+    
+    UInt8 red = (highlightColor) & 0xFF;
+    UInt8 green = (highlightColor>>8) & 0xFF;
+    UInt8 blue = (highlightColor>>16) & 0xFF;
+    UInt8 alpha = (highlightColor>>24) & 0xFF;
     
     glLineWidth(3);
-    glColor4ub(0, 255, 255, 255);
     
     int borderLocationsSize = [borderLocations count];
 	
@@ -91,15 +104,10 @@
         vertices[i] = ccp(x,y);
     }   
     
-    glColor4ub(0, 255, 255, 255);
+    glColor4ub(red, green, blue, alpha);
     ccDrawPoly(vertices, borderLocationsSize, YES);
-    
-    glColor4ub(255, 0, 0, 255);
-    ccDrawCircle(ccp(center.x, center.y), 15, CC_DEGREES_TO_RADIANS(90), 40, NO);
-
-    
+        
     free(vertices);
-
 }
 
 -(void)dealloc {

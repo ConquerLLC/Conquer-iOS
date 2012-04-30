@@ -15,6 +15,7 @@
 		63ACAB1C15470D69004E1FF6 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB1B15470D69004E1FF6 /* Maps */; };
 		63ACAB201548BC35004E1FF6 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1F1548BC35004E1FF6 /* Map.m */; };
 		63ACAB231548C359004E1FF6 /* Territory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Territory.m */; };
+		AA37CC40154F281F00CE7835 /* NSMutableArray_Shuffling.m in Sources */ = {isa = PBXBuildFile; fileRef = AA37CC3F154F281F00CE7835 /* NSMutableArray_Shuffling.m */; };
 		AAB64760154DE34500E1BCD5 /* CGImageInspection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */; };
 		AAB647A6154E202900E1BCD5 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6478F154E202900E1BCD5 /* CDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAB647A7154E202900E1BCD5 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB64792154E202900E1BCD5 /* CFilteringJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -43,18 +44,6 @@
 		DC65616413A969B600A7AC53 /* libkobold2d-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615813A969B600A7AC53 /* libkobold2d-ios.a */; };
 		DC65616513A969B600A7AC53 /* libobjectal-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615913A969B600A7AC53 /* libobjectal-ios.a */; };
 		DC65616613A969B600A7AC53 /* libsneakyinput-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC65615A13A969B600A7AC53 /* libsneakyinput-ios.a */; };
-		DC81EAB9141281CE00735365 /* alien-sfx.caf in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAB141281CE00735365 /* alien-sfx.caf */; };
-		DC81EABA141281CE00735365 /* alien-sfx.caf in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAB141281CE00735365 /* alien-sfx.caf */; };
-		DC81EABB141281CE00735365 /* Author&License.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAD141281CE00735365 /* Author&License.txt */; };
-		DC81EABC141281CE00735365 /* Author&License.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAD141281CE00735365 /* Author&License.txt */; };
-		DC81EABD141281CE00735365 /* dg_grounds32.png in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAE141281CE00735365 /* dg_grounds32.png */; };
-		DC81EABE141281CE00735365 /* dg_grounds32.png in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAAE141281CE00735365 /* dg_grounds32.png */; };
-		DC81EAC1141281CE00735365 /* game-events.png in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB0141281CE00735365 /* game-events.png */; };
-		DC81EAC2141281CE00735365 /* game-events.png in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB0141281CE00735365 /* game-events.png */; };
-		DC81EAC3141281CE00735365 /* orthogonal.tmx in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB1141281CE00735365 /* orthogonal.tmx */; };
-		DC81EAC4141281CE00735365 /* orthogonal.tmx in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB1141281CE00735365 /* orthogonal.tmx */; };
-		DC81EAC5141281CE00735365 /* fx-explosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB2141281CE00735365 /* fx-explosion.plist */; };
-		DC81EAC6141281CE00735365 /* fx-explosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC81EAB2141281CE00735365 /* fx-explosion.plist */; };
 		DC979E3E13B35F8800656CB9 /* libcocos2d-extensions-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC979E3D13B35F8800656CB9 /* libcocos2d-extensions-mac.a */; };
 		DC979E5A13B3607E00656CB9 /* libchipmunk-spacemanager-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC979E5913B3607E00656CB9 /* libchipmunk-spacemanager-mac.a */; };
 		DCC1A0FA13A94ED5005BD75D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC1A0F913A94ED5005BD75D /* Default.png */; };
@@ -94,6 +83,8 @@
 		63ACAB1F1548BC35004E1FF6 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		63ACAB211548C359004E1FF6 /* Territory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Territory.h; sourceTree = "<group>"; };
 		63ACAB221548C359004E1FF6 /* Territory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Territory.m; sourceTree = "<group>"; };
+		AA37CC3E154F281F00CE7835 /* NSMutableArray_Shuffling.h */ = {isa = PBXFileReference; fileEncoding = 4; path = NSMutableArray_Shuffling.h; sourceTree = "<group>"; };
+		AA37CC3F154F281F00CE7835 /* NSMutableArray_Shuffling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableArray_Shuffling.m; sourceTree = "<group>"; };
 		AAB6475C154C81C800E1BCD5 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		AAB6475E154DE34500E1BCD5 /* CGImageInspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGImageInspection.h; sourceTree = "<group>"; };
 		AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGImageInspection.m; sourceTree = "<group>"; };
@@ -141,12 +132,6 @@
 		DC65615813A969B600A7AC53 /* libkobold2d-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC65615913A969B600A7AC53 /* libobjectal-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libobjectal-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC65615A13A969B600A7AC53 /* libsneakyinput-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libsneakyinput-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC81EAAB141281CE00735365 /* alien-sfx.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "alien-sfx.caf"; sourceTree = "<group>"; };
-		DC81EAAD141281CE00735365 /* Author&License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Author&License.txt"; sourceTree = "<group>"; };
-		DC81EAAE141281CE00735365 /* dg_grounds32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dg_grounds32.png; sourceTree = "<group>"; };
-		DC81EAB0141281CE00735365 /* game-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "game-events.png"; path = "David Gervais Tilesets/game-events.png"; sourceTree = "<group>"; };
-		DC81EAB1141281CE00735365 /* orthogonal.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = orthogonal.tmx; path = "David Gervais Tilesets/orthogonal.tmx"; sourceTree = "<group>"; };
-		DC81EAB2141281CE00735365 /* fx-explosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "fx-explosion.plist"; sourceTree = "<group>"; };
 		DC979E3D13B35F8800656CB9 /* libcocos2d-extensions-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libcocos2d-extensions-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC979E5913B3607E00656CB9 /* libchipmunk-spacemanager-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libchipmunk-spacemanager-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9C33E713B5024400931BF2 /* BuildSettings-Debug-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-Mac.xcconfig"; sourceTree = "<group>"; };
@@ -265,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				AAB6478D154E202900E1BCD5 /* TouchJSON */,
+				AA37CC3E154F281F00CE7835 /* NSMutableArray_Shuffling.h */,
+				AA37CC3F154F281F00CE7835 /* NSMutableArray_Shuffling.m */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -341,15 +328,6 @@
 				AAB647BA154E39F600E1BCD5 /* GameWonScene.m */,
 			);
 			name = GameOver;
-			sourceTree = "<group>";
-		};
-		DC81EAAC141281CE00735365 /* David Gervais Tilesets */ = {
-			isa = PBXGroup;
-			children = (
-				DC81EAAD141281CE00735365 /* Author&License.txt */,
-				DC81EAAE141281CE00735365 /* dg_grounds32.png */,
-			);
-			path = "David Gervais Tilesets";
 			sourceTree = "<group>";
 		};
 		DCC1A0D613A94EC0005BD75D = {
@@ -455,11 +433,6 @@
 				63ACAB1B15470D69004E1FF6 /* Maps */,
 				63ACAB11154605BF004E1FF6 /* HUD */,
 				63ACAB0F1545F308004E1FF6 /* Buttons */,
-				DC81EAAB141281CE00735365 /* alien-sfx.caf */,
-				DC81EAB0141281CE00735365 /* game-events.png */,
-				DC81EAB1141281CE00735365 /* orthogonal.tmx */,
-				DC81EAAC141281CE00735365 /* David Gervais Tilesets */,
-				DC81EAB2141281CE00735365 /* fx-explosion.plist */,
 				DCC1A39513A94F1A005BD75D /* config.lua */,
 			);
 			path = Resources;
@@ -567,12 +540,6 @@
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
 				DCC1A10B13A94ED5005BD75D /* iTunesArtwork in Resources */,
 				DCC1A3AF13A94F1A005BD75D /* config.lua in Resources */,
-				DC81EAB9141281CE00735365 /* alien-sfx.caf in Resources */,
-				DC81EABB141281CE00735365 /* Author&License.txt in Resources */,
-				DC81EABD141281CE00735365 /* dg_grounds32.png in Resources */,
-				DC81EAC1141281CE00735365 /* game-events.png in Resources */,
-				DC81EAC3141281CE00735365 /* orthogonal.tmx in Resources */,
-				DC81EAC5141281CE00735365 /* fx-explosion.plist in Resources */,
 				63ACAB101545F308004E1FF6 /* Buttons in Resources */,
 				63ACAB12154605BF004E1FF6 /* HUD in Resources */,
 				63ACAB1C15470D69004E1FF6 /* Maps in Resources */,
@@ -588,12 +555,6 @@
 				DCC1A26E13A94EE6005BD75D /* fps_images.png in Resources */,
 				DCC1A27013A94EE6005BD75D /* icon.icns in Resources */,
 				DCC1A3B013A94F1A005BD75D /* config.lua in Resources */,
-				DC81EABA141281CE00735365 /* alien-sfx.caf in Resources */,
-				DC81EABC141281CE00735365 /* Author&License.txt in Resources */,
-				DC81EABE141281CE00735365 /* dg_grounds32.png in Resources */,
-				DC81EAC2141281CE00735365 /* game-events.png in Resources */,
-				DC81EAC4141281CE00735365 /* orthogonal.tmx in Resources */,
-				DC81EAC6141281CE00735365 /* fx-explosion.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +587,7 @@
 				AAB647B3154E2A6E00E1BCD5 /* Player.m in Sources */,
 				AAB647B6154E2BEC00E1BCD5 /* HumanPlayer.m in Sources */,
 				AAB647BB154E39F600E1BCD5 /* GameWonScene.m in Sources */,
+				AA37CC40154F281F00CE7835 /* NSMutableArray_Shuffling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
