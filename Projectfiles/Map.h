@@ -19,7 +19,7 @@
 
     CGImageInspection* imageInspector;
     
-    NSMutableArray* continents;
+    NSMutableDictionary* continents;
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
     NSDictionary* properties;
@@ -37,6 +37,6 @@
 
 @property (nonatomic) CGSize size;
 @property (strong, nonatomic) NSDictionary* properties;
-@property (strong, nonatomic) NSMutableArray* continents;
+@property (strong, nonatomic) NSMutableDictionary* continents;
 
 @end

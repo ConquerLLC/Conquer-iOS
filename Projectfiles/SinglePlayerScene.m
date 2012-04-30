@@ -18,11 +18,12 @@
 - (void) gameLoop;
 @end
 
--(id) init
-{
-	if ((self = [super init]))
-	{
-		self.isTouchEnabled = true;
+-(id) init {
+
+	if ((self = [super init])) {
+        
+
+        self.isTouchEnabled = true;
 
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 
@@ -72,8 +73,7 @@
     NSLog(@"Cleaned up SinglePlayerScene");
 }
 
-- (void) gameLoop: (ccTime) dT
-{
+- (void) gameLoop: (ccTime) dT {
     if(isGameOver) {
         return;
     }
@@ -144,16 +144,13 @@
 
 
 
--(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"touch began!");
+-(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	// get the position in tile coordinates from the touch location
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
 	currentPlayer.originTerritory = [map territoryAtTouch:[touches anyObject]];
 }
 
--(void) draw
-{
+-(void) draw {
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
     if(currentPlayer.originTerritory != nil) {
         [currentPlayer.originTerritory highlight];

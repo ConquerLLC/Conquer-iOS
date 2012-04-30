@@ -54,4 +54,11 @@
     NSLog(@"%@ finished turn", name);
 }
 
+
+
+-(void)dealloc {
+    
+    NSLog(@"Player %@ deallocated", name);
+}
+
 @end

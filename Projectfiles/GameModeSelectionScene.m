@@ -13,10 +13,8 @@
 
 @implementation GameModeSelectionScene
 
--(id) init
-{
-	if ((self = [super init]))
-	{
+-(id) init {
+	if ((self = [super init])) {
         // Create some menu items
         CCMenuItemImage * menuItem1 = [CCMenuItemImage itemFromNormalImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton" ofType:@"png" inDirectory:@"Buttons"]
                                                              selectedImage: [[NSBundle mainBundle] pathForResource:@"myfirstbutton_selected" ofType:@"png" inDirectory:@"Buttons"]
