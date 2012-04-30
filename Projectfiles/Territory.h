@@ -44,6 +44,7 @@
 
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories;
 -(BOOL)neighbors:(Territory*)territory;
+-(BOOL)attack:(Territory*)territory;
 
 
 -(void)highlightWithColor:(UInt32)highlightColor;

@@ -14,7 +14,6 @@
 
 
 
-#define ARMIES_PER_TURN 3
 
 
 #endif

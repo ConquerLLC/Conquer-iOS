@@ -84,8 +84,14 @@
 
         if(state == STATE_ATTACKING) {
             //if we're attacking then this must be the the origin
-            originTerritory = territory;
-            destinationTerritory = nil;
+            if(territory.armies > 1) {
+                //valid attack starting point!
+                originTerritory = territory;
+                destinationTerritory = nil;   
+            }else {
+                originTerritory = nil;
+                destinationTerritory = nil;
+            }
         }else if(state == STATE_PLACING) {
             //if we're placing then only the origin matters
             originTerritory = territory;

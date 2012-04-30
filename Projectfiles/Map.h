@@ -24,6 +24,8 @@
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
     NSDictionary* properties;
+    int armiesPerTurn;
+    int territoriesForAdditionalArmyPerTurn;
     
 	CCSprite* displayNode;
     CCNode* HUD;
@@ -39,8 +41,12 @@
 
 
 @property (nonatomic) CGSize size;
-@property (strong, nonatomic) NSDictionary* properties;
 @property (strong, nonatomic) NSMutableDictionary* continents;
 @property (strong, nonatomic) CCNode* HUD;
+
+@property (strong, nonatomic) NSDictionary* properties;
+@property (nonatomic) int armiesPerTurn;
+@property (nonatomic) int territoriesForAdditionalArmyPerTurn;
+
 
 @end

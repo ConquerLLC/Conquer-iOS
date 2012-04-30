@@ -135,8 +135,17 @@
         //do any setup required on a player-by-player level
         currentPlayer.state = STATE_IDLE;
     }else if(currentPlayer.state == STATE_IDLE) {
+        
         //time to move!
-        currentPlayer.armiesToPlace+= ARMIES_PER_TURN;
+        int armies = map.armiesPerTurn;
+        int territoriesOwned = 0;
+        for(Territory* territory in map.territories) {
+            if(territory.owner == currentPlayer) {
+                territoriesOwned++;
+            }
+        }
+        currentPlayer.armiesToPlace+= armies + (territoriesOwned/map.territoriesForAdditionalArmyPerTurn);
+
         currentPlayer.state = STATE_PLACING;
         [currentPlayer place];
     }else if(currentPlayer.state == STATE_HAS_PLACED) {

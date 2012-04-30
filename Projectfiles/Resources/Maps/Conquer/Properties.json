@@ -1,4 +1,6 @@
 {
+    "ArmiesPerTurn": 3,
+    "TerritoriesForAdditionalArmyPerTurn": 3,
     "Continents": {
         "Left Side": {
             "ArmiesPerTurn": 5,

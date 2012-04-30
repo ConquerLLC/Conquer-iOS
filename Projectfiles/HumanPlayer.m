@@ -43,9 +43,14 @@
         if(originTerritory == nil || destinationTerritory == nil) {
             return;
         }
-        
+                
         NSLog(@"%@ chose to attack %@ from %@", name, destinationTerritory.name, originTerritory.name);
         //TODO: ATTACK!!!!
+        if([originTerritory attack:destinationTerritory]) {
+            //attack successful - territory conquered
+        }else {
+            //attack failed - territory not conquered
+        }
         
         
     }else if(state == STATE_FORTIFYING) {

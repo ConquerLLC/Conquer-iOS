@@ -45,7 +45,7 @@
 
 -(void)setArmies:(int)theArmies {
     _armies = theArmies;
-    labelArmies.string = [NSString stringWithFormat:@"%d", _armies];
+    labelArmies.string = [NSString stringWithFormat:@"%d", self.armies];
 }
 
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories {
@@ -53,12 +53,42 @@
 }
 
 -(BOOL)neighbors:(Territory*)territory {
-    NSLog(@"Checking if %@ neighbors %@", territory.name, name);
+    //NSLog(@"Checking if %@ neighbors %@", territory.name, name);
     for(Territory* neighbor in neighboringTerritories) {
         if(territory == neighbor) {
             return true;
         }
     }
+    return false;
+}
+
+//return TRUE if the attack succeeded
+-(BOOL)attack:(Territory*)territory {
+    
+    //can't attack oneself
+    if(territory.owner == owner) {
+        NSLog(@"Attempted to attack a territory that was already owned");
+        return true;
+    }
+    
+    //must have at least two armies to attack with
+    if(self.armies < 2) {
+        NSLog(@"Must have at least 2 armies to attack with a territory. (%@ has %d)", name, self.armies);
+        return false;
+    }
+    
+    //TODO: add in the risk-style attack logic
+    //TODO: add in the ability to keep some units back
+    if(self.armies > territory.armies) {
+        territory.owner = owner;
+        self.armies-= territory.armies;
+        territory.armies = self.armies-1;
+        self.armies = 1;
+        
+        NSLog(@"Attacked %@ from %@. Remaining armies %d", territory.name, name, self.armies);
+       return true;
+    }
+    
     return false;
 }
 

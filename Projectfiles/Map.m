@@ -26,8 +26,11 @@
 
 
 @synthesize size;
-@synthesize properties;
 @synthesize continents;
+
+@synthesize properties;
+@synthesize armiesPerTurn;
+@synthesize territoriesForAdditionalArmyPerTurn;
 
 @synthesize HUD;
 
@@ -75,7 +78,12 @@
     properties = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
     if(properties == nil) {
         NSLog(@"Failed to map properties file. Error=%@", error);
+        exit(1);
     }
+    
+    armiesPerTurn = [(NSString*)([properties objectForKey:@"ArmiesPerTurn"]) intValue];
+    territoriesForAdditionalArmyPerTurn = [(NSString*)([properties objectForKey:@"TerritoriesForAdditionalArmyPerTurn"]) intValue];
+    
     NSDictionary* territoryInfoMap = [properties objectForKey:@"Territories"];
     NSDictionary* continentInfoMap = [properties objectForKey:@"Continents"];
     NSMutableDictionary* continentToTerritoryNamesMap = [[NSMutableDictionary alloc] init];
@@ -83,10 +91,10 @@
     for(id key in continentInfoMap) {
         NSDictionary* continentInfo = [continentInfoMap objectForKey:key];
         NSString* continentName = ((NSString*)key);
-        int armiesPerTurn = [(NSString*)([continentInfo objectForKey:@"ArmiesPerTurn"]) intValue];
+        int continentArmiesPerTurn = [(NSString*)([continentInfo objectForKey:@"ArmiesPerTurn"]) intValue];
         NSArray* territories = (NSArray*)([continentInfo objectForKey:@"Territories"]);
         
-        Continent* continent = [[Continent alloc] initWithName:continentName armiesPerTurn:armiesPerTurn onMap:self];
+        Continent* continent = [[Continent alloc] initWithName:continentName armiesPerTurn:continentArmiesPerTurn onMap:self];
         [continents setObject:continent forKey:continentName];
         [continentToTerritoryNamesMap setObject:territories forKey:continent.name];
     }
