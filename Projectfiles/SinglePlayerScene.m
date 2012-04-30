@@ -17,10 +17,16 @@
 
 @implementation SinglePlayerScene
 
+@interface Map (PrivateAPI)
+- (void) gameLoop;
+@end
+
 -(id) init {
+
 	if ((self = [super init])) {
         
-		self.isTouchEnabled = true;
+
+        self.isTouchEnabled = true;
 
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 

@@ -26,4 +26,6 @@
     BOOL isGameOver;
 }
 
+-(Player* )nextPlayer;
+
 @end
