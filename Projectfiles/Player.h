@@ -35,21 +35,25 @@
         
     ushort state;
     ushort lastState;
+    
+    NSString* stateDescription;
+    
+    int armiesToPlace;
 }
 
 -(id)initWithName:(NSString*)theName andColor:(UInt32)theColor;
 
 -(void)touchedTerritory:(Territory*)territory;
 
--(NSString*)stateName;
-
 @property (strong, nonatomic) NSString* name;
 @property (nonatomic) UInt32 color;
 @property (strong, nonatomic) Territory* originTerritory;
 @property (strong, nonatomic) Territory* destinationTerritory;
+@property (strong, nonatomic) NSString* stateDescription;
 
 @property (nonatomic) ushort state;
 @property (nonatomic) ushort lastState;
+@property (nonatomic) int armiesToPlace;
 
 
 @end

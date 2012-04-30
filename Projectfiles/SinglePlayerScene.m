@@ -6,6 +6,7 @@
 //  Copyright 2012 Conquer, LLC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "SinglePlayerScene.h"
 #import "Map.h"
 #import "Territory.h"
@@ -13,6 +14,7 @@
 #import "HumanPlayer.h"
 #import "GameWonScene.h"
 
+#import "UIColor_ColorFromUInt32.h"
 #import "NSMutableArray_Shuffling.h"
 
 @implementation SinglePlayerScene
@@ -56,8 +58,8 @@
 		
         //create the players
 		players = [[NSMutableArray alloc] init];
-        [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:500000]];
-        [players addObject:[[HumanPlayer alloc] initWithName:@"Bobble" andColor:53000]];
+        [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:(255) + (0<<8) + (0<<16) + (255<<24)]];
+        [players addObject:[[HumanPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24)]];
         currentPlayerIndex = 0;
 		
         
@@ -136,6 +138,7 @@
         currentPlayer.state = STATE_IDLE;
     }else if(currentPlayer.state == STATE_IDLE) {
         //time to move!
+        currentPlayer.armiesToPlace+= ARMIES_PER_TURN;
         currentPlayer.state = STATE_PLACING;
         [currentPlayer place];
     }else if(currentPlayer.state == STATE_HAS_PLACED) {
@@ -182,17 +185,13 @@
 -(void) draw {
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
     
-    //highlight owned territories
+    //highlight territories by player
     for(Territory* territory in [map territories]) {
-        if(territory.owner == currentPlayer) {
-            [territory highlight:(100) + (100<<8) + (0<<16) + (255<<24)];
-        }
+        [territory highlightWithColor:territory.owner.color];
     }
-    
-    
-    
+        
     if(currentPlayer.originTerritory != nil) {
-        [currentPlayer.originTerritory highlight:(0) + (255<<8) + (0<<16) + (255<<24)];
+        [currentPlayer.originTerritory selectWithColor:(0) + (255<<8) + (255<<16) + (255<<24)];
         
         labelOriginTerritory.visible = true;
         [labelOriginTerritory setString:currentPlayer.originTerritory.name];
@@ -203,9 +202,9 @@
     }
     
     
-    
+    labelCurrentPlayerName.color = ccc3(currentPlayer.color&0xFF, (currentPlayer.color>>8)&0xFF, (currentPlayer.color>>16)&0xFF);
     [labelCurrentPlayerName setString:currentPlayer.name];
-    [labelCurrentPlayerState setString:currentPlayer.stateName];
+    [labelCurrentPlayerState setString:currentPlayer.stateDescription];
 }
 
 @end

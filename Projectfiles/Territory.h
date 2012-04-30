@@ -39,7 +39,8 @@
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories;
 
 
--(void)highlight:(UInt32)highlightColor;
+-(void)highlightWithColor:(UInt32)highlightColor;
+-(void)selectWithColor:(UInt32)selectColor;
     
     
 @property (strong, nonatomic) NSString* name;

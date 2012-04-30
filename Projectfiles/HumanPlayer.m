@@ -7,6 +7,7 @@
 //
 
 #import "HumanPlayer.h"
+#import "Territory.h"
 
 @implementation HumanPlayer
 
@@ -19,11 +20,37 @@
     return self;
 }
 
+-(void)touchedTerritory:(Territory*)territory {
+    [super touchedTerritory:territory];
+    
+    if(state == STATE_PLACING) {
+        if(originTerritory == nil) {
+            return;
+        }
+        if(armiesToPlace > 0) {
+            originTerritory.armies++;
+            armiesToPlace--;
+            NSLog(@"%@ placed unit on territory %@. %@ has %d units. %@ has %d units", name, originTerritory.name, name, armiesToPlace, originTerritory.name, originTerritory.armies);
+            if(armiesToPlace > 0) {
+                stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
+            }else {
+                [self endTurn];
+            }
+        }else {
+            [self endTurn];
+        }
+    }
+}
+
 -(void)place {
     NSLog(@"%@ is placing armies", name);
-
     
-    //[self endTurn];
+    if(armiesToPlace > 0) {
+        stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
+    }else {
+        [self endTurn];
+    }
+    
 }
 
 -(void)attack {

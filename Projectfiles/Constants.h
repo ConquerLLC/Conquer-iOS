@@ -12,4 +12,9 @@
 #define DEBUG_MODE YES
 
 
+
+
+#define ARMIES_PER_TURN 3
+
+
 #endif

@@ -18,6 +18,9 @@
 
 @synthesize state;
 @synthesize lastState;
+@synthesize stateDescription;
+
+@synthesize armiesToPlace;
 
 -(id)initWithName:(NSString*)theName andColor:(UInt32)theColor {
 	
@@ -29,6 +32,9 @@
         
         state = STATE_GAME_NOT_STARTED;
         lastState = STATE_GAME_NOT_STARTED;
+        stateDescription = @"Game not started";
+        
+        armiesToPlace = 0;
     }
     
     return self;
@@ -52,6 +58,7 @@
 -(void)endTurn {
     lastState = state;
     state = (state+1)%NUM_STATES;
+    stateDescription = @"";
     NSLog(@"%@ finished turn", name);
 }
 
@@ -99,32 +106,6 @@
             originTerritory = nil;
             destinationTerritory = nil;            
         }
-    }
-}
-
--(NSString*)stateName {
-    if(state == STATE_IDLE) {
-        return @"Idle";
-    }else if(state == STATE_PLACING) {
-        return @"Placing";
-    }else if(state == STATE_HAS_PLACED) {
-        return @"Has Placed";
-    }else if(state == STATE_ATTACKING) {
-        return @"Attacking";
-    }else if(state == STATE_HAS_ATTACKED) {
-        return @"Has Attacked";
-    }else if(state == STATE_FORTIFYING) {
-        return @"Fortifying";
-    }else if(state == STATE_HAS_FORTIFIED) {
-        return @"Has Fortified";
-    }else if(state == STATE_GAME_NOT_STARTED) {
-        return @"Game Not Yet Started";
-    }else if(state == STATE_GAME_WON) {
-        return @"Game Won";
-    }else if(state == STATE_GAME_LOST) {
-        return @"Game Lost";
-    }else {
-        return @"Unknown";
     }
 }
 

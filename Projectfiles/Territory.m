@@ -77,8 +77,19 @@
     return borderLocations;
 }
 
+-(void)selectWithColor:(UInt32)selectColor {
+    UInt8 red = (selectColor) & 0xFF;
+    UInt8 green = (selectColor>>8) & 0xFF;
+    UInt8 blue = (selectColor>>16) & 0xFF;
+    UInt8 alpha = (selectColor>>24) & 0xFF;
+    
+    glLineWidth(3);
+    
+    glColor4ub(red, green, blue, alpha);
+    ccDrawCircle(center, 10, CC_DEGREES_TO_RADIANS(360), 10, NO);
+}
 
--(void)highlight:(UInt32)highlightColor {
+-(void)highlightWithColor:(UInt32)highlightColor {
     
     UInt8 red = (highlightColor) & 0xFF;
     UInt8 green = (highlightColor>>8) & 0xFF;
