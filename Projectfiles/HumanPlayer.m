@@ -44,13 +44,18 @@
             return;
         }
         
+        NSLog(@"%@ chose to attack %@ from %@", name, destinationTerritory.name, originTerritory.name);
         //TODO: ATTACK!!!!
+        
+        
     }else if(state == STATE_FORTIFYING) {
         if(originTerritory == nil || destinationTerritory == nil) {
             return;
         }
         
         //TODO: FORTIFY!!!
+        
+        
     }
 }
 
@@ -68,8 +73,8 @@
 -(void)attack {
     NSLog(@"%@ is attacking", name);
 
+    stateDescription = [NSString stringWithFormat:@"Attacking"];
 
-    [self endTurn];
 }
 
 -(void)fortify {

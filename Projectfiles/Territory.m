@@ -18,6 +18,7 @@
 @synthesize name;
 @synthesize center;
 @synthesize owner;
+@synthesize color;
 @synthesize armies = _armies;
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap {
@@ -44,11 +45,21 @@
 
 -(void)setArmies:(int)theArmies {
     _armies = theArmies;
-    labelArmies.string = [NSString stringWithFormat:@"Armies %d", _armies];
+    labelArmies.string = [NSString stringWithFormat:@"%d", _armies];
 }
 
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories {
     neighboringTerritories = theNeighboringTerritories;
+}
+
+-(BOOL)neighbors:(Territory*)territory {
+    NSLog(@"Checking if %@ neighbors %@", territory.name, name);
+    for(Territory* neighbor in neighboringTerritories) {
+        if(territory == neighbor) {
+            return true;
+        }
+    }
+    return false;
 }
 
 -(void)setLocations:(NSArray*)theLocations {

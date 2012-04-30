@@ -63,8 +63,24 @@
 }
 
 -(void)touchedTerritory:(Territory*)territory {
+    
+    if(territory == nil) {
+        //water was touched
+        originTerritory = nil;
+        destinationTerritory = nil;
+        return;
+    }
+    
+    
     if(territory.owner == self) {
         //territory IS owned
+        
+        //selecting oneself deselects when not PLACING
+        if(originTerritory == territory && state != STATE_PLACING) {
+            originTerritory = nil;
+            destinationTerritory = nil;
+            return;
+        }
 
         if(state == STATE_ATTACKING) {
             //if we're attacking then this must be the the origin
@@ -77,7 +93,7 @@
         }else if(state == STATE_FORTIFYING) {
             //if we're fortifying then both are owned by the player
             if(originTerritory != nil) {
-                if(destinationTerritory == nil) {
+                if(destinationTerritory == nil && [originTerritory neighbors:territory]) {
                     destinationTerritory = territory;
                 }else {
                     originTerritory = territory;
@@ -91,20 +107,21 @@
         
         if(state == STATE_ATTACKING) {
             //if we're attacking then the origin must be set
-            if(originTerritory != nil) {
+            if(originTerritory != nil && [originTerritory neighbors:territory]) {
                 destinationTerritory = territory;
             }else {
-                originTerritory = nil;
+                //invalid touch
                 destinationTerritory = nil;
-            }
+           }
         }else if(state == STATE_PLACING) {
             //if we're placing then this is an invalid touch
             originTerritory = nil;
             destinationTerritory = nil;
+
         }else if(state == STATE_FORTIFYING) {
             //if we're fortifying then this is an invalid touch
-            originTerritory = nil;
-            destinationTerritory = nil;            
+            destinationTerritory = nil;
+       
         }
     }
 }

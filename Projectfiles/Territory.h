@@ -43,6 +43,7 @@
 -(NSArray*)borderLocations;
 
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories;
+-(BOOL)neighbors:(Territory*)territory;
 
 
 -(void)highlightWithColor:(UInt32)highlightColor;
@@ -51,6 +52,7 @@
     
 @property (strong, nonatomic) NSString* name;
 @property (nonatomic) CGPoint center;
+@property (nonatomic) UInt32 color;
 
 @property (strong, nonatomic) Player* owner;
 @property (nonatomic) int armies;

@@ -169,15 +169,7 @@
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
     Territory* touchedTerritory = [map territoryAtTouch:[touches anyObject]];
     
-    if(touchedTerritory == nil) {
-        //water touched
-        currentPlayer.originTerritory = nil;
-        currentPlayer.destinationTerritory = nil;
-        
-    }else {
-        //land touched
-        [currentPlayer touchedTerritory: touchedTerritory];
-    }
+    [currentPlayer touchedTerritory: touchedTerritory];
 }
 
 -(void) draw {
@@ -188,11 +180,12 @@
         [territory highlightWithColor:territory.owner.color];
     }
     
-    //show the current player's selection
+    //show the current player's selections
     if(currentPlayer.originTerritory != nil) {
         [currentPlayer.originTerritory selectWithColor:(0) + (255<<8) + (255<<16) + (255<<24)];
-        
-
+    }
+    if(currentPlayer.destinationTerritory != nil) {
+        [currentPlayer.destinationTerritory selectWithColor:(255) + (0<<8) + (255<<16) + (255<<24)];
     }
     
     //show the current player status

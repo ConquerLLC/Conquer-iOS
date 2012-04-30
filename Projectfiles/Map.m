@@ -134,7 +134,6 @@
                     
                     
                     NSString* territoryName = @"!UNKNOWN!";
-                    NSArray* neighboringTerritories = nil;
                     for(id key in territoryInfoMap) {
                         NSDictionary* territoryInfo = [territoryInfoMap objectForKey:key];
                         int aRed = [(NSString*)([territoryInfo objectForKey:@"Red"]) intValue];
@@ -143,7 +142,6 @@
                         
                         if(aRed == red && aBlue == blue && aGreen == green) {
                             territoryName = ((NSString*)key);
-                            neighboringTerritories = (NSArray*)([territoryInfo objectForKey:@"Neighbors"]);
                             break;
                         }
                         
@@ -161,11 +159,7 @@
                         }
                     }
                     
-                    territory = [[Territory alloc] initWithColor:pixel name:territoryName onContinent:continent onMap:self];
-                    if(neighboringTerritories != nil) {
-                        [territory setNeighboringTerritories:neighboringTerritories];
-                    }
-                    
+                    territory = [[Territory alloc] initWithColor:pixel name:territoryName onContinent:continent onMap:self];                    
                     [continent addTerritory:territory];
                     
                     [territoryWithColor setObject:territory forKey:colorKey];
@@ -179,6 +173,27 @@
             }
         }
 	}
+    
+    NSLog(@"Setting territory neighbors...");
+    
+    for(id colorKey in territoryWithColor) {
+        Territory* territory = [territoryWithColor objectForKey:colorKey];    
+        NSDictionary* territoryInfo = [territoryInfoMap objectForKey:territory.name];
+        NSArray* neighboringTerritoryNames = (NSArray*)([territoryInfo objectForKey:@"Neighbors"]);
+        
+        NSMutableArray* neighboringTerritories = [[NSMutableArray alloc] init];
+        for(NSString* neighboringTerritoryName in neighboringTerritoryNames) {
+            for(id colorKey2 in territoryWithColor) {
+                Territory* territory2 = [territoryWithColor objectForKey:colorKey2];
+                if([territory2.name isEqualToString:neighboringTerritoryName]) {
+                    [neighboringTerritories addObject:territory2];                   
+                    NSLog(@"%@ added to neighbors of %@", territory2.name, territory.name);
+               }
+            }
+        }
+        [territory setNeighboringTerritories:neighboringTerritories];
+    }
+    
     
     NSLog(@"Determining territory pixels...");
     
