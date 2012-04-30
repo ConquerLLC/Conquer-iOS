@@ -102,12 +102,12 @@
     UInt8* raw = (UInt8*) self.pixels ;
     raw += byteIndex ;
         
-    *red    = ((CGFloat) (*raw++));
-    *green  = ((CGFloat) (*raw++));
-    *blue   = ((CGFloat) (*raw++));
-    *alpha  = ((CGFloat) (*raw++));
+    *red    = ((*raw++));
+    *green  = ((*raw++));
+    *blue   = ((*raw++));
+    *alpha  = ((*raw++));
     
-    *pixel = ((*red)<<24) + ((*green)<<16) + ((*blue)<<8) + (*alpha);
+    *pixel = ((*red)) + ((*green)<<8) + ((*blue)<<16) + ((*alpha)<<24);
 }
 
 @end

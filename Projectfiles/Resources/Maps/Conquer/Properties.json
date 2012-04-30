@@ -1,10 +1,10 @@
 [
 	{
-		"Name": "North America",
+		"Name": "Left Side",
 		"ArmiesPerTurn": 5,
 		"Territories": [
 			{
-                "Name": "",
+                "Name": "Yellow",
 				"Red": ,
 				"Green": ,
 				"Blue": 
