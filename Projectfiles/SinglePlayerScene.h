@@ -10,10 +10,18 @@
 #import "LayerBase.h"
 
 @class Map;
+@class Player;
 
 @interface SinglePlayerScene : LayerBase
 {
 	Map* map;
+    
+    CCLabelTTF* labelOriginTerritory;
+    
+    
+    NSMutableArray* players;
+    int currentPlayerIndex;
+    BOOL isGameOver;
 }
 
 @end

@@ -40,11 +40,17 @@
         // add the menu to your scene
         [self addChild:myMenu];
         
+        NSLog(@"GameModeSelectionScene created");
 
 	}
 	
 	
 	return self;
+}
+
+-(void) cleanup {
+    
+    NSLog(@"Cleaned up GameModeSelectionScene");
 }
 
 @end

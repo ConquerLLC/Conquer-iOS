@@ -9,6 +9,8 @@
 #import "SinglePlayerScene.h"
 #import "Map.h"
 #import "Territory.h"
+#import "HumanPlayer.h"
+#import "GameWonScene.h"
 
 @implementation SinglePlayerScene
 
@@ -16,6 +18,8 @@
 {
 	if ((self = [super init]))
 	{
+		self.isTouchEnabled = true;
+
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 
 		//setup the basic scene
@@ -27,26 +31,112 @@
 		CCSprite* hud = [CCSprite spriteWithFile:@"HUD/SinglePlayer.png"];
 		hud.position = ccp(winSize.width/2, winSize.height/2);
 		[self addChild:hud z:10];
+        
+        labelOriginTerritory = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
+        [hud addChild: labelOriginTerritory];
 		
-		
+        //load the map
 		map = [[Map alloc] initWithMapName:@"Conquer"];
 		[self addChild:[map displayNode] z:-1];
 		
+        //create the players
+		players = [[NSMutableArray alloc] init];
+        [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:500000]];
+        [players addObject:[[HumanPlayer alloc] initWithName:@"Bobble" andColor:53000]];
+        currentPlayerIndex = 0;
 		
-		
-		self.isTouchEnabled = true;
+        
+        
+        
+
+        //start the game!
+        isGameOver = false;
+        [self schedule:@selector(gameLoop:)];
+
+        NSLog(@"SinglePlayerScene created");
+
 	}
 	
 	
 	return self;
 }
 
+-(void) cleanup {
+    [self unscheduleAllSelectors];
+    players = nil;
+    [map cleanup];
+    NSLog(@"Cleaned up SinglePlayerScene");
+}
 
+- (void) gameLoop: (ccTime) dT
+{
+    if(isGameOver) {
+        return;
+    }
+    
+    //check win condition
+    unsigned int loserCount = 0;
+    for(Player* player in players) {
+        if(player.state == STATE_GAME_LOST) {
+            loserCount++;
+        }
+    }
+    if(loserCount == [players count]-1) {
+        NSLog(@"Game is over - checking for winner");
+        //game is over yo
+        for(Player* player in players) {
+            if(player.state != STATE_GAME_LOST) {
+                //winna winna!
+                
+                
+                dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
+                dispatch_queue_t queue = dispatch_get_main_queue();
+                
+                dispatch_after(delay, queue, ^{
+                    [[CCDirector sharedDirector] replaceScene: [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[GameWonScene scene]]];
+                });
+                
+                NSLog(@"Winner is %@", player.name);
+            }
+        }
+        [self cleanup];
+        isGameOver = true;
+        return;
+    }
+    
+    
+    Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+    if(currentPlayer.state == STATE_GAME_LOST) {
+        //skip over the losers
+        currentPlayer = [self nextPlayer];
+    }else if(currentPlayer.state == STATE_GAME_NOT_STARTED) {
+        //do any setup required on a player-by-player level
+        currentPlayer.state = STATE_IDLE;
+    }else if(currentPlayer.state == STATE_IDLE) {
+        //time to move!
+        currentPlayer.state = STATE_PLACING;
+        [currentPlayer place];
+    }else if(currentPlayer.state == STATE_HAS_PLACED) {
+        currentPlayer.state = STATE_ATTACKING;
+        [currentPlayer attack];
+    }else if(currentPlayer.state == STATE_HAS_ATTACKED) {
+        currentPlayer.state = STATE_FORTIFYING;
+        [currentPlayer fortify];
+    }else if(currentPlayer.state == STATE_HAS_FORTIFIED) {
+        currentPlayer.state = STATE_IDLE;
+        [self nextPlayer];
+    }
+}
 
-
-
-
-
+-(Player* )nextPlayer {
+    
+    Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+    currentPlayer.originTerritory = nil;
+    currentPlayer.destinationTerritory = nil;
+    
+    currentPlayerIndex = (currentPlayerIndex+1)%[players count];
+    return [players objectAtIndex:currentPlayerIndex];   
+}
 
 
 
@@ -54,13 +144,21 @@
 {
 	NSLog(@"touch began!");
 	// get the position in tile coordinates from the touch location
-	[map territoryAtTouch:[touches anyObject]];
+    Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+	currentPlayer.originTerritory = [map territoryAtTouch:[touches anyObject]];
 }
 
 -(void) draw
 {
-    if([map selectedTerritory] != nil) {
-        [[map selectedTerritory] highlight];
+    Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+    if(currentPlayer.originTerritory != nil) {
+        [currentPlayer.originTerritory highlight];
+        
+        labelOriginTerritory.visible = true;
+        [labelOriginTerritory setString:currentPlayer.originTerritory.name];
+        labelOriginTerritory.position = (CGPoint){currentPlayer.originTerritory.center.x, currentPlayer.originTerritory.center.y};
+    }else {
+        labelOriginTerritory.visible = false;
     }
 }
 

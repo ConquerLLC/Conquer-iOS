@@ -20,19 +20,6 @@
 @synthesize bytesPerRow ;
 @synthesize bytesPerPixel ;
 
-- (void) dealloc {
-    if (self.context) {
-        CGContextRelease(self.context) ;
-        self.context = 0 ;
-    }
-    
-    if (self.pixels) {
-        free(self.pixels) ;
-        self.pixels = 0 ;
-    }
-    
-    NSLog(@"CGImageInspection going away") ;
-}
 
 + (CGImageInspection *) imageInspectionWithCGImage: (CGImageRef) imageRef {
     return [[CGImageInspection alloc] initWithCGImage:imageRef] ;
@@ -74,7 +61,7 @@
         if (self.context == NULL) {
             free(self.pixels) ;
             self.pixels = 0 ;
-            CGColorSpaceRelease(colorSpace) ;
+            CGColorSpaceRelease(colorSpace);
             return nil ;
         }
         CGContextDrawImage(context, (CGRect) {{0, 0}, {pixelsWide, pixelsHigh}}, imageRef) ;
@@ -108,6 +95,24 @@
     *alpha  = ((*raw++));
     
     *pixel = ((*red)) + ((*green)<<8) + ((*blue)<<16) + ((*alpha)<<24);
+}
+
+
+-(void) cleanup {
+    if (self.context) {
+        CGContextRelease(self.context) ;
+        self.context = 0 ;
+    }
+    
+    if (self.pixels) {
+        free(self.pixels) ;
+        self.pixels = 0 ;
+    }
+}
+
+- (void) dealloc {
+    [self cleanup];
+    NSLog(@"CGImageInspection deallocated") ;
 }
 
 @end

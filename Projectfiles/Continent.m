@@ -10,4 +10,12 @@
 
 @implementation Continent
 
+
+
+
+-(void)dealloc {
+    
+    NSLog(@"Continent deallocated");
+}
+
 @end

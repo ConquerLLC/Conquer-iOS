@@ -8,15 +8,19 @@
 
 #import "Territory.h"
 #import "Map.h"
+#import "cocos2d.h"
 
 
 @implementation Territory
 
+@synthesize name;
+@synthesize center;
 
--(id)initWithColor:(UInt32)theColor onMap:(Map*)theMap {
+-(id)initWithColor:(UInt32)theColor name:(NSString*)theName onMap:(Map*)theMap {
 	
 	if((self = [super init])) {
 		color = theColor;
+        name = theName;
         map = theMap;
         locations = [[NSArray alloc] init];
         borderLocations = [[NSArray alloc] init];
@@ -30,7 +34,7 @@
     int locationsSize = [locations count];
     UInt32 xSum = 0;
     UInt32 ySum = 0;
-    NSLog(@"Finding center for territory with color %lu, pixelCount=%d", color, locationsSize);
+    NSLog(@"Finding center for territory %@, color=%lu, pixelCount=%d", name, color, locationsSize);
     for(int i = 0; i < locationsSize; i++) {
         NSNumber* locationN = [locations objectAtIndex:i];
         int location = [locationN intValue];
@@ -47,7 +51,7 @@
     //convert to x,y coords       
     center.x = xSum/locationsSize;
     center.y = ySum/locationsSize;
-    NSLog(@"Center: %f,%f", center.x, center.y);
+    NSLog(@"Center: %d,%d", (int)center.x, (int)center.y);
     
     //TEMP!
     borderLocations = locations;
@@ -89,8 +93,15 @@
     
     glColor4ub(255, 0, 0, 255);
     ccDrawCircle(ccp(center.x, center.y), 15, CC_DEGREES_TO_RADIANS(90), 40, NO);
+
     
     free(vertices);
+
+}
+
+-(void)dealloc {
+    
+    NSLog(@"Map deallocated");
 }
 
 @end

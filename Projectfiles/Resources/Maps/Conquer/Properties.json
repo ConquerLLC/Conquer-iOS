@@ -1,14 +1,111 @@
-[
-	{
-		"Name": "Left Side",
-		"ArmiesPerTurn": 5,
-		"Territories": [
-			{
-                "Name": "Yellow",
-				"Red": ,
-				"Green": ,
-				"Blue": 
-			}
-		]
-	}
-]
+{
+    "Continents": {
+        "Left Side": {
+            "ArmiesPerTurn": 5,
+            "Territories": [
+                            "Yellow",
+                            "Green",
+                            "Yellow Green",
+                            "Light Blue",
+                            "Aquamarine",
+                            "Dark Blue"
+                            ]
+        },
+        "Right Side": {
+            "ArmiesPerTurn": 3,
+            "Territories": [
+                            "Blood Red",
+                            "Red",
+                            "Purple"
+                            ]
+        }
+    },
+    "Territories": {
+        "Yellow": {
+            "Red": 197,
+            "Green": 183,
+            "Blue": 19,
+            "Neighbors": [
+                          "Green"
+                          ]
+        },
+        "Green": {
+            "Red": 19,
+            "Green": 197,
+            "Blue": 74,
+            "Neighbors": [
+                          "Yellow",
+                          "Light Blue",
+                          "Yellow Green",
+                          "Aquamarine"
+                          ]
+        },
+        "Yellow Green": {
+            "Red": 86,
+            "Green": 197,
+            "Blue": 19,
+            "Neighbors": [
+                          "Green",
+                          "Aquamarine"
+                          ]
+        },
+        "Light Blue": {
+            "Red": 19,
+            "Green": 153,
+            "Blue": 197,
+            "Neighbors": [
+                          "Green",
+                          "Aquamarine",
+                          "Dark Blue"
+                          ]
+        },
+        "Aquamarine": {
+            "Red": 19,
+            "Green": 197,
+            "Blue": 157,
+            "Neighbors": [
+                          "Green",
+                          "Yellow Green",
+                          "Dark Blue"
+                          ]
+        },
+        "Dark Blue": {
+            "Red": 65,
+            "Green": 19,
+            "Blue": 197,
+            "Neighbors": [
+                          "Aquamarine",
+                          "Light Blue",
+                          "Purple"
+                          ]
+        },
+        "Purple": {
+            "Red": 197,
+            "Green": 19,
+            "Blue": 174,
+            "Neighbors": [
+                          "Dark Blue",
+                          "Blood Red",
+                          "Red"
+                          ]
+        },
+        "Blood Red": {
+            "Red": 153,
+            "Green": 6,
+            "Blue": 6,
+            "Neighbors": [
+                          "Purple",
+                          "Red"
+                          ]
+        },
+        "Red": {
+            "Red": 197,
+            "Green": 19,
+            "Blue": 19,
+            "Neighbors": [
+                          "Purple",
+                          "Blood Red"
+                          ]
+        }
+    }
+}

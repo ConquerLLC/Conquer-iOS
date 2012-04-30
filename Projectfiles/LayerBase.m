@@ -28,4 +28,8 @@
 	return scene;
 }
 
+-(void) cleanup {
+    NSLog(@"OVERRIDE cleanup");
+}
+
 @end

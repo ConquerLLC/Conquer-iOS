@@ -21,13 +21,11 @@
 	CGSize gridSize;
 
     CGImageInspection* imageInspector;
-    
 	UInt32* colorAtLocation;
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
-	
-    Territory* selectedTerritory;
-    
+    NSDictionary* properties;
+	    
 	CCSprite* displayNode;
 }
 
@@ -36,9 +34,11 @@
 -(Territory*)territoryAtLocation:(CGPoint)location;
 -(Territory*)territoryAtTouch:(UITouch*)touch;
 
+-(void) cleanup;
+
 
 @property (nonatomic) CGSize size;
 @property (nonatomic) CGSize gridSize;
-@property (strong, nonatomic) Territory* selectedTerritory;
+@property (strong, nonatomic) NSDictionary* properties;
 
 @end

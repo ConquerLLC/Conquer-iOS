@@ -11,9 +11,11 @@
 #import "Territory.h"
 #import "Continent.h"
 #import "CGImageInspection.h"
+#import "CJSONDeserializer.h"
+
 
 @interface Map (PrivateAPI)
--(void)createHitMap;
+-(void)initializeMapData;
 -(CGPoint)toGridLocation:(CGPoint)location;
 -(CGPoint)locationFromTouch:(UITouch*)touch;
 -(UInt32)colorAtLocation:(CGPoint)location;
@@ -25,7 +27,7 @@
 
 @synthesize size;
 @synthesize gridSize;
-@synthesize selectedTerritory;
+@synthesize properties;
 
 
 -(id)initWithMapName:(NSString*)theMapName {
@@ -39,10 +41,8 @@
 		gridSize.width = (int)(size.width/GRID_SIZE);
 		gridSize.height = (int)(size.height/GRID_SIZE);
         
-        selectedTerritory = nil;
-
-		//create the hitmap
-		[self createHitMap];
+		//create the hitmap and load map properties
+		[self initializeMapData];
 		
 		//load the specific map
 		displayNode = [CCSprite spriteWithFile:[NSString stringWithFormat:@"Maps/%@/DisplayMap.png", name]];
@@ -56,8 +56,19 @@
 	return displayNode;
 }
 
--(void)createHitMap {
-	NSLog(@"Creating hitmap");
+-(void)initializeMapData {
+	
+    NSLog(@"Loading map properties");
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"Maps/%@/Properties.json", name]];
+    NSError *error = nil;
+    properties = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
+    if(properties == nil) {
+        NSLog(@"Failed to map properties file. Error=%@", error);
+    }
+    NSDictionary* territoryInfoMap = [properties objectForKey:@"Territories"];
+    
+    NSLog(@"Creating hitmap");
 	
 	UIImage *hitmapImage = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@/HitMap.png", name]];
 	
@@ -108,7 +119,7 @@
             colorCount = [NSNumber numberWithInt:([colorCount intValue]+1)];
             [colorCountMap setObject:colorCount forKey:colorKey];
             
-            if([colorCount intValue] == 50) {
+            if([colorCount intValue] == 500) {
                 
                 if(red == 0 && green == 0 && blue == 255) {
                     //ocean
@@ -117,10 +128,27 @@
                     
                     NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
                     
-                    Territory* territory = [[Territory alloc] initWithColor:pixel onMap:self];
+                    
+                    
+                    NSString* territoryName = @"!UNKNOWN!";
+                    for(id key in territoryInfoMap) {
+                        NSDictionary* territoryInfo = [territoryInfoMap objectForKey:key];
+                        int aRed = [(NSString*)([territoryInfo objectForKey:@"Red"]) intValue];
+                        int aBlue = [(NSString*)([territoryInfo objectForKey:@"Blue"]) intValue];
+                        int aGreen = [(NSString*)([territoryInfo objectForKey:@"Green"]) intValue];
+                        
+                        if(aRed == red && aBlue == blue && aGreen == green) {
+                            territoryName = ((NSString*)key);
+                            break;
+                        }
+                        
+                        //NSLog(@"props: %d, %d, %d", aRed, aBlue, aGreen);
+                    }
+                    
+                    Territory* territory = [[Territory alloc] initWithColor:pixel name:territoryName onMap:self];
                     [territoryWithColor setObject:territory forKey:colorKey];
                     if(DEBUG_MODE) {
-                        NSLog(@"Added territory for color key %@", colorKey);
+                        NSLog(@"Added territory %@ for color key %@", territory.name, colorKey);
                     }
                 }
             }else {
@@ -167,6 +195,8 @@
     }
 	
 	NSLog(@"Hitmap created");
+    
+    
 }	
 
 -(CGPoint)toGridLocation:(CGPoint)location {
@@ -207,8 +237,7 @@
 	
 	NSNumber* colorKey = [NSNumber numberWithUnsignedInt:color];
 	Territory* territory = [territoryWithColor objectForKey:colorKey];
-	NSLog(@"Territory=%@", territory);
-    selectedTerritory = territory;
+	NSLog(@"Territory=%@", territory.name);
 
 	return territory;
 }
@@ -218,13 +247,18 @@
 
 
 
-
-
-
--(void)dealloc {
+-(void) cleanup {
     if(colorAtLocation != nil) {
         free(colorAtLocation);
     }
+    if(imageInspector != nil) {
+        [imageInspector cleanup];
+    }
+}
+
+- (void) dealloc {
+    [self cleanup];
+    NSLog(@"Map deallocated");
 }
 
 @end

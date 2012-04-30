@@ -12,4 +12,6 @@
            alpha: (UInt8 *) alpha 
            pixel: (UInt32 *) pixel;
 
+-(void) cleanup;
+
 @end

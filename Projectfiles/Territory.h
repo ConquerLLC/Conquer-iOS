@@ -14,6 +14,7 @@
 @interface Territory : NSObject {
     
     Map* map;
+    NSString* name;
 	UInt32 color;
 
     
@@ -23,7 +24,7 @@
 	
 }
 
--(id)initWithColor:(UInt32)theColor onMap:(Map*)theMap;
+-(id)initWithColor:(UInt32)theColor name:(NSString*)theName onMap:(Map*)theMap;
 -(void)setLocations:(NSArray*)theLocations;
 
 -(NSArray*)locations;
@@ -32,4 +33,7 @@
 -(void)highlight;
     
     
+@property (strong, nonatomic) NSString* name;
+@property (nonatomic) CGPoint center;
+
 @end
