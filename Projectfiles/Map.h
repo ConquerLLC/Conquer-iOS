@@ -12,6 +12,7 @@
 #define GRID_SIZE 1
 
 @class Territory;
+@class CGImageInspection;
 
 @interface Map : NSObject {
     
@@ -19,7 +20,8 @@
 	CGSize size;
 	CGSize gridSize;
 
-    CFDataRef imageData;
+    CGImageInspection* imageInspector;
+    
 	UInt32* colorAtLocation;
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;

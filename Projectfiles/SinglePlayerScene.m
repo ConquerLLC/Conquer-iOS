@@ -29,7 +29,7 @@
 		[self addChild:hud z:10];
 		
 		
-		map = [[Map alloc] initWithMapName:@"WorldMap1"];
+		map = [[Map alloc] initWithMapName:@"Conquer"];
 		[self addChild:[map displayNode] z:-1];
 		
 		

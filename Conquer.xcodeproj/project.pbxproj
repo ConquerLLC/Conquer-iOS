@@ -15,6 +15,7 @@
 		63ACAB1C15470D69004E1FF6 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 63ACAB1B15470D69004E1FF6 /* Maps */; };
 		63ACAB201548BC35004E1FF6 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB1F1548BC35004E1FF6 /* Map.m */; };
 		63ACAB231548C359004E1FF6 /* Territory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACAB221548C359004E1FF6 /* Territory.m */; };
+		AAB64760154DE34500E1BCD5 /* CGImageInspection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */; };
 		AAFD01FB154A03A400C756FA /* Continent.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFD01FA154A03A400C756FA /* Continent.m */; };
 		DC485B1113AA0E5600F2BC70 /* libchipmunk-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B0D13AA0E5600F2BC70 /* libchipmunk-mac.a */; };
 		DC485B1713AA0EBB00F2BC70 /* libbox2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC485B1613AA0EBB00F2BC70 /* libbox2d-mac.a */; };
@@ -81,6 +82,8 @@
 		63ACAB211548C359004E1FF6 /* Territory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Territory.h; sourceTree = "<group>"; };
 		63ACAB221548C359004E1FF6 /* Territory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Territory.m; sourceTree = "<group>"; };
 		AAB6475C154C81C800E1BCD5 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		AAB6475E154DE34500E1BCD5 /* CGImageInspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGImageInspection.h; sourceTree = "<group>"; };
+		AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGImageInspection.m; sourceTree = "<group>"; };
 		AAFD01F9154A03A400C756FA /* Continent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continent.h; sourceTree = "<group>"; };
 		AAFD01FA154A03A400C756FA /* Continent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Continent.m; sourceTree = "<group>"; };
 		DC3BE97813B4FB71003739CC /* BuildSettings-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-iOS.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 				63ACAB221548C359004E1FF6 /* Territory.m */,
 				AAFD01F9154A03A400C756FA /* Continent.h */,
 				AAFD01FA154A03A400C756FA /* Continent.m */,
+				AAB6475E154DE34500E1BCD5 /* CGImageInspection.h */,
+				AAB6475F154DE34500E1BCD5 /* CGImageInspection.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 				63ACAB201548BC35004E1FF6 /* Map.m in Sources */,
 				63ACAB231548C359004E1FF6 /* Territory.m in Sources */,
 				AAFD01FB154A03A400C756FA /* Continent.m in Sources */,
+				AAB64760154DE34500E1BCD5 /* CGImageInspection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

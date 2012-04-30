@@ -30,7 +30,7 @@
     int locationsSize = [locations count];
     UInt32 xSum = 0;
     UInt32 ySum = 0;
-    NSLog(@"Finding center for territory %@, pixelCount=%d", self, locationsSize);
+    NSLog(@"Finding center for territory with color %lu, pixelCount=%d", color, locationsSize);
     for(int i = 0; i < locationsSize; i++) {
         NSNumber* locationN = [locations objectAtIndex:i];
         int location = [locationN intValue];

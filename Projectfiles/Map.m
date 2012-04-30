@@ -10,6 +10,7 @@
 #import "Map.h"
 #import "Territory.h"
 #import "Continent.h"
+#import "CGImageInspection.h"
 
 @interface Map (PrivateAPI)
 -(void)createHitMap;
@@ -68,81 +69,97 @@
 	
 	colorAtLocation = (UInt32*)malloc(colorAtLocationSize * UInt32Size);
 	memset(colorAtLocation, 0, colorAtLocationSize * UInt32Size);
+    
+    imageInspector = [CGImageInspection imageInspectionWithCGImage:hitmapImage.CGImage];
 	
-    imageData = CGDataProviderCopyData(CGImageGetDataProvider(hitmapImage.CGImage));
-	const UInt32* pixels = (const UInt32*)CFDataGetBytePtr(imageData);
-	int pixelsSize = hitmapImage.size.width * hitmapImage.size.height;
-	
+    UInt32 pixel;
+    UInt8 red;
+    UInt8 green;
+    UInt8 blue;
+    UInt8 alpha;
+    
 	int gridI;
-	int y;
-	int x;
-	
 	int gridX;
 	int gridY;	
 	
     NSMutableDictionary* colorCountMap = [[NSMutableDictionary alloc] init];
     
-	NSLog(@"Mapping pixels to colors and territories...");
-	for(int i = 0; i < pixelsSize; i++) {
-		UInt32 pixel = pixels[i];
-        NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
-        
-        //get the number of times this color as been used
-        NSNumber* colorCount = [colorCountMap objectForKey:colorKey];
-        if(colorCount == nil) {
-            colorCount = [NSNumber numberWithInt:0];
-        }
-        colorCount = [NSNumber numberWithInt:([colorCount intValue]+1)];
-        [colorCountMap setObject:colorCount forKey:colorKey];
-        
-        if([colorCount intValue] == 50) {
+    int pixelCount = size.width*size.height;
+	NSLog(@"Mapping pixels to colors and territories (examining %d pixels)...", pixelCount);
+	for(int x = 0; x < size.width; x++) {
+        for(int y = 0; y < size.height; y++) {
             
-            int r = (pixel)&0xFF;
-            int g = (pixel>>8)&0xFF;
-            int b = (pixel>>16)&0xFF;
+            [imageInspector colorAt:(CGPoint){x, size.height-y} 
+                                red:&red 
+                                green:&green 
+                                blue:&blue 
+                                alpha:&alpha 
+                                pixel:&pixel];  
+           
+            //NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
             
-            if(r == 0 && g == 0 && b == 255) {
-                //ocean
-            }else {
-                //land!
-                
-                Territory* territory = [[Territory alloc] initWithColor:pixel onMap:self];
-                [territoryWithColor setObject:territory forKey:colorKey];
-                if(DEBUG_MODE) {
-                    NSLog(@"Added territory for color key %@", colorKey);
-                }
+            NSNumber* colorKey = [NSNumber numberWithUnsignedInt:pixel];
+            
+            //get the number of times this color as been used
+            NSNumber* colorCount = [colorCountMap objectForKey:colorKey];
+            if(colorCount == nil) {
+                colorCount = [NSNumber numberWithInt:0];
             }
-        }else {
+            colorCount = [NSNumber numberWithInt:([colorCount intValue]+1)];
+            [colorCountMap setObject:colorCount forKey:colorKey];
             
+            if([colorCount intValue] == 50) {
+                
+                if(red == 0 && green == 0 && blue == 255) {
+                    //ocean
+                }else {
+                    //land!
+                    
+                    NSLog(@"R=%d, G=%d, B=%d, pixel=%lu at location %d,%d", red, green, blue, pixel, x, y);
+                    
+                    Territory* territory = [[Territory alloc] initWithColor:pixel onMap:self];
+                    [territoryWithColor setObject:territory forKey:colorKey];
+                    if(DEBUG_MODE) {
+                        NSLog(@"Added territory for color key %@", colorKey);
+                    }
+                }
+            }else {
+                
+            }
+            
+            //map to grid coords
+            gridX = x/GRID_SIZE;
+            gridY = y/GRID_SIZE;
+            if(gridY >= gridSize.height) gridY = gridSize.height-1;
+            if(gridX >= gridSize.width) gridX = gridSize.width-1;
+            gridI = (gridY * gridSize.width) + gridX;
+            
+            colorAtLocation[gridI] = pixel;   
         }
-		
-		//convert to x,y coords
-		y = (i/size.width);
-		x = i - (y*size.width);
-		y = size.height-y;
-		
-		//map to grid coords
-		gridX = x/GRID_SIZE;
-		gridY = y/GRID_SIZE;
-		if(gridY >= gridSize.height) gridY = gridSize.height-1;
-		if(gridX >= gridSize.width) gridX = gridSize.width-1;
-		gridI = (gridY * gridSize.width) + gridX;
-		
-		colorAtLocation[gridI] = pixel;        
 	}
     
     NSLog(@"Determining territory pixels...");
     
     for(id colorKey in territoryWithColor) {
         Territory* territory = [territoryWithColor objectForKey:colorKey];
-        UInt32 pixel = [colorKey unsignedIntValue];
+        UInt32 territoryColor = [colorKey unsignedIntValue];
         
         NSMutableArray* locations = [[NSMutableArray alloc] init];
 
-        for(int i = 0; i < pixelsSize; i++) {
-            if(pixels[i] == pixel) {
-                //this pixel belongs to this territory
-                [locations addObject:[NSNumber numberWithInt:i]];
+        for(int x = 0; x < size.width; x++) {
+            for(int y = 0; y < size.height; y++) {
+                
+                [imageInspector colorAt:(CGPoint){x, size.height-y} 
+                                    red:&red 
+                                  green:&green 
+                                   blue:&blue 
+                                  alpha:&alpha 
+                                  pixel:&pixel];  
+                
+                if(territoryColor == pixel) {
+                    //this pixel belongs to this territory
+                    [locations addObject:[NSNumber numberWithInt:((size.height-y)*size.width + x)]];
+                }
             }
         }
     
@@ -205,9 +222,6 @@
 
 
 -(void)dealloc {
-    if(imageData != nil) {
-        CFRelease(imageData);
-    }
     if(colorAtLocation != nil) {
         free(colorAtLocation);
     }
