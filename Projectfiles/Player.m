@@ -54,10 +54,16 @@
     NSLog(@"OVERRIDE fortify!!!");
 }
 
+-(void)endState {
+    lastState = state;
+    state = (state+1)%NUM_STATES;
+    stateDescription = @"";
+    NSLog(@"%@ finished state", name);
+}
 
 -(void)endTurn {
     lastState = state;
-    state = (state+1)%NUM_STATES;
+    state = STATE_IDLE;
     stateDescription = @"";
     NSLog(@"%@ finished turn", name);
 }

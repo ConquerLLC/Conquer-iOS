@@ -85,7 +85,7 @@
         territory.armies = self.armies-1;
         self.armies = 1;
         
-        NSLog(@"Attacked %@ from %@. Remaining armies %d", territory.name, name, self.armies);
+        NSLog(@"Attacked %@ from %@. Remaining armies on %@: %d", territory.name, name, name, self.armies);
        return true;
     }
     

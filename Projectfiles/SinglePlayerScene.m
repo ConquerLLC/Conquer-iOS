@@ -103,6 +103,40 @@
         return;
     }
 
+    //check loss condition
+    for(Player* player in players) {
+        if(player.state < NUM_STATES) {
+            BOOL hasLost = true;
+            for(Territory* territory in map.territories) {
+                if(territory.owner == player) {
+                    //still alive
+                    hasLost = false;
+                }
+            }
+            if(hasLost) {
+                player.state = STATE_GAME_LOST;
+                
+                if([player isKindOfClass:[HumanPlayer class]]) {
+                    
+                    //oh noes! we lost!
+                    
+                    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
+                    dispatch_queue_t queue = dispatch_get_main_queue();
+                    
+                    dispatch_after(delay, queue, ^{
+                        [[CCDirector sharedDirector] replaceScene: [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[GameWonScene scene]]];
+                    });
+                    
+                    
+                    [self cleanup];
+                    isGameOver = true;
+                    return;
+                }
+                
+            }
+        }
+    }
+
     //check win condition
     unsigned int loserCount = 0;
     for(Player* player in players) {
@@ -116,7 +150,6 @@
         for(Player* player in players) {
             if(player.state != STATE_GAME_LOST) {
                 //winna winna!
-                
                 
                 dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
                 dispatch_queue_t queue = dispatch_get_main_queue();

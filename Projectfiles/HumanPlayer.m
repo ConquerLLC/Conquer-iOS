@@ -34,10 +34,10 @@
             if(armiesToPlace > 0) {
                 stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
             }else {
-                [self endTurn];
+                [self endState];
             }
         }else {
-            [self endTurn];
+            [self endState];
         }
     }else if(state == STATE_ATTACKING) {
         if(originTerritory == nil || destinationTerritory == nil) {
@@ -70,7 +70,7 @@
     if(armiesToPlace > 0) {
         stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
     }else {
-        [self endTurn];
+        [self endState];
     }
     
 }
@@ -86,7 +86,7 @@
     NSLog(@"%@ is fortifying", name);
 
     
-    [self endTurn];
+    [self endState];
 }
 
 
