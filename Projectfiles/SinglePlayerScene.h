@@ -18,11 +18,15 @@
     
     CCLabelTTF* labelCurrentPlayerName;
     CCLabelTTF* labelCurrentPlayerState;
+    CCLabelTTF* labelCurrentPlayerTurnTimer;
     
     
     NSMutableArray* players;
     int currentPlayerIndex;
+    
     BOOL isGameOver;
+    ccTime secondsRemainingInTurn;
+    int initialSecondsInTurn;
 }
 
 -(Player* )nextPlayer;

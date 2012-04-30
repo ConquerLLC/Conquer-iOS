@@ -42,13 +42,21 @@
 		hud.position = ccp(winSize.width/2, winSize.height/2);
 		[self addChild:hud z:10];
         
+        
+        //setup the timers
+        initialSecondsInTurn = 15;
+        secondsRemainingInTurn = initialSecondsInTurn;
+       
+        
         labelCurrentPlayerName = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
         labelCurrentPlayerName.position = ccp(winSize.width/2, 50);
         [hud addChild: labelCurrentPlayerName];
         labelCurrentPlayerState = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
         labelCurrentPlayerState.position = ccp(winSize.width/2, 20);
         [hud addChild: labelCurrentPlayerState];
-
+        labelCurrentPlayerTurnTimer = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
+        labelCurrentPlayerTurnTimer.position = ccp(winSize.width - 100, winSize.height-20);
+        [hud addChild: labelCurrentPlayerTurnTimer];
 		
         //load the map
 		map = [[Map alloc] initWithMapName:@"Conquer" andHudLayer:hud];
@@ -59,13 +67,12 @@
         [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:(255) + (0<<8) + (0<<16) + (255<<24)]];
         [players addObject:[[HumanPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24)]];
         currentPlayerIndex = 0;
-		
-        
+
+        //assign territories to players randomly
         uint playerIndex = 0;
         NSMutableArray* unassignedTerritories = [[NSMutableArray alloc] initWithArray:[map territories]];
         [unassignedTerritories shuffle];
         
-        //assign territories to players randomly
         for(Territory* unassignedTerritory in unassignedTerritories) {
             unassignedTerritory.owner = [players objectAtIndex:playerIndex];
             playerIndex = (playerIndex+1)%[players count];
@@ -95,7 +102,7 @@
     if(isGameOver) {
         return;
     }
-    
+
     //check win condition
     unsigned int loserCount = 0;
     for(Player* player in players) {
@@ -126,17 +133,26 @@
         return;
     }
     
+    secondsRemainingInTurn-= dT;
     
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
-    if(currentPlayer.state == STATE_GAME_LOST) {
+    if(secondsRemainingInTurn <= 0) {
+        //end the player's turn
+        [currentPlayer endTurn];
+        //restart the clock
+        secondsRemainingInTurn = initialSecondsInTurn;
+        //and go on to the next player
+        currentPlayer = [self nextPlayer];
+    }else if(currentPlayer.state == STATE_GAME_LOST) {
         //skip over the losers
         currentPlayer = [self nextPlayer];
     }else if(currentPlayer.state == STATE_GAME_NOT_STARTED) {
         //do any setup required on a player-by-player level
         currentPlayer.state = STATE_IDLE;
     }else if(currentPlayer.state == STATE_IDLE) {
-        
-        //time to move!
+
+
+        //give the player armies for the turn
         int armies = map.armiesPerTurn;
         int territoriesOwned = 0;
         for(Territory* territory in map.territories) {
@@ -146,6 +162,7 @@
         }
         currentPlayer.armiesToPlace+= armies + (territoriesOwned/map.territoriesForAdditionalArmyPerTurn);
 
+        //time to move!
         currentPlayer.state = STATE_PLACING;
         [currentPlayer place];
     }else if(currentPlayer.state == STATE_HAS_PLACED) {
@@ -156,7 +173,7 @@
         [currentPlayer fortify];
     }else if(currentPlayer.state == STATE_HAS_FORTIFIED) {
         currentPlayer.state = STATE_IDLE;
-        [self nextPlayer];
+        currentPlayer = [self nextPlayer];
     }
 }
 
@@ -199,8 +216,11 @@
     
     //show the current player status
     labelCurrentPlayerName.color = ccc3(currentPlayer.color&0xFF, (currentPlayer.color>>8)&0xFF, (currentPlayer.color>>16)&0xFF);
-    [labelCurrentPlayerName setString:currentPlayer.name];
-    [labelCurrentPlayerState setString:currentPlayer.stateDescription];
+    labelCurrentPlayerName.string = currentPlayer.name;
+    
+    labelCurrentPlayerState.string = currentPlayer.stateDescription;
+
+    labelCurrentPlayerTurnTimer.string = [NSString stringWithFormat:@"%d seconds", [[NSNumber numberWithFloat:secondsRemainingInTurn] intValue]];
 }
 
 @end

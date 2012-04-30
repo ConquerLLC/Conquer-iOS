@@ -83,6 +83,8 @@
     
     armiesPerTurn = [(NSString*)([properties objectForKey:@"ArmiesPerTurn"]) intValue];
     territoriesForAdditionalArmyPerTurn = [(NSString*)([properties objectForKey:@"TerritoriesForAdditionalArmyPerTurn"]) intValue];
+    NSLog(@"Armies per turn: %d", armiesPerTurn);
+    NSLog(@"Territories required for each additional army per turn: %d", territoriesForAdditionalArmyPerTurn);
     
     NSDictionary* territoryInfoMap = [properties objectForKey:@"Territories"];
     NSDictionary* continentInfoMap = [properties objectForKey:@"Continents"];
