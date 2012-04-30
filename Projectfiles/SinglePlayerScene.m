@@ -42,8 +42,6 @@
 		hud.position = ccp(winSize.width/2, winSize.height/2);
 		[self addChild:hud z:10];
         
-        labelOriginTerritory = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
-        [hud addChild: labelOriginTerritory];
         labelCurrentPlayerName = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
         labelCurrentPlayerName.position = ccp(winSize.width/2, 50);
         [hud addChild: labelCurrentPlayerName];
@@ -53,7 +51,7 @@
 
 		
         //load the map
-		map = [[Map alloc] initWithMapName:@"Conquer"];
+		map = [[Map alloc] initWithMapName:@"Conquer" andHudLayer:hud];
 		[self addChild:[map displayNode] z:-1];
 		
         //create the players
@@ -189,19 +187,15 @@
     for(Territory* territory in [map territories]) {
         [territory highlightWithColor:territory.owner.color];
     }
-        
+    
+    //show the current player's selection
     if(currentPlayer.originTerritory != nil) {
         [currentPlayer.originTerritory selectWithColor:(0) + (255<<8) + (255<<16) + (255<<24)];
         
-        labelOriginTerritory.visible = true;
-        [labelOriginTerritory setString:currentPlayer.originTerritory.name];
-        labelOriginTerritory.position = (CGPoint){currentPlayer.originTerritory.center.x, currentPlayer.originTerritory.center.y};
 
-    }else {
-        labelOriginTerritory.visible = false;
     }
     
-    
+    //show the current player status
     labelCurrentPlayerName.color = ccc3(currentPlayer.color&0xFF, (currentPlayer.color>>8)&0xFF, (currentPlayer.color>>16)&0xFF);
     [labelCurrentPlayerName setString:currentPlayer.name];
     [labelCurrentPlayerState setString:currentPlayer.stateDescription];

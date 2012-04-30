@@ -30,7 +30,7 @@
         if(armiesToPlace > 0) {
             originTerritory.armies++;
             armiesToPlace--;
-            NSLog(@"%@ placed unit on territory %@. %@ has %d units. %@ has %d units", name, originTerritory.name, name, armiesToPlace, originTerritory.name, originTerritory.armies);
+            NSLog(@"%@ placed unit on territory %@. %@ has %d units to place. %@ has %d units", name, originTerritory.name, name, armiesToPlace, originTerritory.name, originTerritory.armies);
             if(armiesToPlace > 0) {
                 stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
             }else {
@@ -39,6 +39,18 @@
         }else {
             [self endTurn];
         }
+    }else if(state == STATE_ATTACKING) {
+        if(originTerritory == nil || destinationTerritory == nil) {
+            return;
+        }
+        
+        //TODO: ATTACK!!!!
+    }else if(state == STATE_FORTIFYING) {
+        if(originTerritory == nil || destinationTerritory == nil) {
+            return;
+        }
+        
+        //TODO: FORTIFY!!!
     }
 }
 

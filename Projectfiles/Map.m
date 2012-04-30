@@ -29,12 +29,14 @@
 @synthesize properties;
 @synthesize continents;
 
+@synthesize HUD;
 
--(id)initWithMapName:(NSString*)theMapName {
+-(id)initWithMapName:(NSString*)theMapName andHudLayer:(CCNode*)theHUD {
 	
 	if ((self = [super init])) {
 		
 		name = theMapName;
+        HUD = theHUD;
         size = [[CCDirector sharedDirector] winSize];
 
         continents = [[NSMutableDictionary alloc] init];

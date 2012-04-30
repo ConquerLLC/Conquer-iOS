@@ -28,6 +28,12 @@
     
     Player* owner;
     int armies;
+    
+    
+
+    //persistent drawing stuff
+    CCLabelTTF* labelArmies;
+
 }
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap;

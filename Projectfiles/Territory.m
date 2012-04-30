@@ -18,7 +18,7 @@
 @synthesize name;
 @synthesize center;
 @synthesize owner;
-@synthesize armies;
+@synthesize armies = _armies;
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap {
 	
@@ -31,9 +31,20 @@
         borderLocations = [[NSArray alloc] init];
         neighboringTerritories = [[NSArray alloc] init];
         owner = nil;
+        
+        labelArmies = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
+        [map.HUD addChild: labelArmies];
+        
+        [self setArmies:1];
+        
         NSLog(@"Created territory %@ on continent %@", name, continent.name);
 	}
 	return self;
+}
+
+-(void)setArmies:(int)theArmies {
+    _armies = theArmies;
+    labelArmies.string = [NSString stringWithFormat:@"Armies %d", _armies];
 }
 
 -(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories {
@@ -63,6 +74,8 @@
     //convert to x,y coords       
     center.x = xSum/locationsSize;
     center.y = ySum/locationsSize;
+    labelArmies.position = center;
+    
     NSLog(@"Center: %d,%d", (int)center.x, (int)center.y);
     
     //TEMP!

@@ -26,9 +26,10 @@
     NSDictionary* properties;
     
 	CCSprite* displayNode;
+    CCNode* HUD;
 }
 
--(id)initWithMapName:(NSString*)theMapName;
+-(id)initWithMapName:(NSString*)theMapName andHudLayer:(CCNode*)theHUD;
 -(CCNode*)displayNode;
 -(Territory*)territoryAtLocation:(CGPoint)location;
 -(Territory*)territoryAtTouch:(UITouch*)touch;
@@ -40,5 +41,6 @@
 @property (nonatomic) CGSize size;
 @property (strong, nonatomic) NSDictionary* properties;
 @property (strong, nonatomic) NSMutableDictionary* continents;
+@property (strong, nonatomic) CCNode* HUD;
 
 @end
