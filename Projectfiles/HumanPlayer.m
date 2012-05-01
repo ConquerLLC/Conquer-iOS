@@ -65,6 +65,11 @@
     }
 }
 
+- (void)setup {
+    
+    
+}
+
 -(void)place {
     NSLog(@"%@ is placing armies", name);
     

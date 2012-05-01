@@ -9,9 +9,11 @@
 #import "EasyComputerPlayer.h"
 #import "Territory.h"
 #import "Map.h"
+#include <unistd.h>
 
 @implementation EasyComputerPlayer
 
+short attackAttemptCount = 0;
 
 -(id)initWithName:(NSString*)theName andColor:(UInt32)theColor onMap:(Map*)theMap {
 	
@@ -25,7 +27,7 @@
 -(void)place {
     NSLog(@"%@ is placing armies", name);
     
-    while(armiesToPlace > 0) {       
+    if(armiesToPlace > 0) {       
         //pick a random territory
         NSArray* ownedTerritories = [map territoriesForPlayer:self];
         originTerritory = [ownedTerritories objectAtIndex:(int)(arc4random()%[ownedTerritories count])];
@@ -37,10 +39,11 @@
         
         stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
         
-        usleep(500);
+        usleep(500 * 1000);
+    }else {
+        [self endState];
     }
     
-    [self endState];
 }
 
 -(void)attack {
@@ -50,22 +53,39 @@
     //pick a random territory
     NSArray* ownedTerritories = [map territoriesForPlayer:self];
     
-    short attemptCount = 0;
-    while((originTerritory == nil || originTerritory.armies < 2) && attemptCount++ < 7) {
-        originTerritory = [ownedTerritories objectAtIndex:(int)(arc4random()%[ownedTerritories count])];
+    if(attackAttemptCount++ < 10) {
+        short originSelectAttemptCount = 0;
+        while((originTerritory == nil || originTerritory.armies < 2) && originSelectAttemptCount++ < 7) {
+            originTerritory = [ownedTerritories objectAtIndex:(int)(arc4random()%[ownedTerritories count])];
+            uint ownedNeighborCount = [[originTerritory neighboringTerritoriesForPlayer:self] count];
+            if(ownedNeighborCount == [[originTerritory neighboringTerritories] count]) {
+                originTerritory = nil;
+            }
+        }
+        
+        short destinationSelectAttemptCount = 0;
+        while((destinationTerritory == nil || destinationTerritory.owner == self) && destinationSelectAttemptCount++ < 7) {
+            destinationTerritory = [originTerritory.neighboringTerritories objectAtIndex:(int)(arc4random()%[originTerritory.neighboringTerritories count])];
+        }
+    
+        if(destinationTerritory.owner == self) {
+            return;
+        }
+        
+        //try and attack
+        NSLog(@"%@ is attacking from %@ to %@", name, originTerritory.name, destinationTerritory.name);
+        stateDescription = [NSString stringWithFormat:@"Attacking %@", destinationTerritory.name];
+        
+        [originTerritory attack:destinationTerritory];
+        
+        originTerritory = nil;
+        destinationTerritory = nil;
+        
+        usleep(500 * 1000);
+        
+    }else {
+        [self endState];
     }
-    
-    attemptCount = 0;
-    while((destinationTerritory == nil || destinationTerritory.owner == self) && attemptCount++ < 7) {
-        destinationTerritory = [originTerritory.neighboringTerritories objectAtIndex:(int)(arc4random()%[originTerritory.neighboringTerritories count])];
-    }
-    
-    //try and attack
-    NSLog(@"%@ is attacking from %@ to %@", name, originTerritory.name, destinationTerritory.name);
-    [originTerritory attack:destinationTerritory];
-    
-    
-    [self endState];
 }
 
 -(void)fortify {
@@ -75,5 +95,9 @@
     [self endState];
 }
 
+-(void)endState {
+    attackAttemptCount = 0;
+    [super endState];
+}
 
 @end

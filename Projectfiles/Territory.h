@@ -42,7 +42,11 @@
 -(NSArray*)locations;
 -(NSArray*)borderLocations;
 
+-(NSArray*)neighboringTerritoriesForPlayer:(Player*)player;
+
 -(BOOL)isNeighborTo:(Territory*)territory;
+
+
 -(BOOL)attack:(Territory*)territory;
 
 

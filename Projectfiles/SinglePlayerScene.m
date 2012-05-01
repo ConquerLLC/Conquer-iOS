@@ -84,10 +84,16 @@
 
         //start the game!
         isGameOver = false;
-        [self schedule:@selector(gameLoop:)];
 
+        dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+        dispatch_queue_t queue = dispatch_get_main_queue();
+        
+        dispatch_after(delay, queue, ^{
+            [self schedule:@selector(gameLoop:)];
+        });
+        
+        
         NSLog(@"SinglePlayerScene created");
-
 	}
 	
 	
@@ -173,6 +179,8 @@
     secondsRemainingInTurn-= dT;
     
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
+    BOOL isComputerPlayer = [currentPlayer isKindOfClass:[ComputerPlayer class]];
+
     if(secondsRemainingInTurn <= 0) {
         //end the player's turn
         [currentPlayer endTurn];
@@ -180,12 +188,15 @@
         secondsRemainingInTurn = initialSecondsInTurn;
         //and go on to the next player
         currentPlayer = [self nextPlayer];
+        
     }else if(currentPlayer.state == STATE_GAME_LOST) {
         //skip over the losers
         currentPlayer = [self nextPlayer];
+        
     }else if(currentPlayer.state == STATE_GAME_NOT_STARTED) {
         //do any setup required on a player-by-player level
         currentPlayer.state = STATE_IDLE;
+        
     }else if(currentPlayer.state == STATE_IDLE) {
 
 
@@ -202,15 +213,28 @@
         //time to move!
         currentPlayer.state = STATE_PLACING;
         [currentPlayer place];
+        
+    }else if(currentPlayer.state == STATE_PLACING && isComputerPlayer) {
+        [currentPlayer place];        
+        
     }else if(currentPlayer.state == STATE_HAS_PLACED) {
         currentPlayer.state = STATE_ATTACKING;
         [currentPlayer attack];
+        
+    }else if(currentPlayer.state == STATE_ATTACKING && isComputerPlayer) {
+        [currentPlayer attack];        
+        
     }else if(currentPlayer.state == STATE_HAS_ATTACKED) {
         currentPlayer.state = STATE_FORTIFYING;
         [currentPlayer fortify];
+        
+    }else if(currentPlayer.state == STATE_FORTIFYING && isComputerPlayer) {
+        [currentPlayer fortify];        
+        
     }else if(currentPlayer.state == STATE_HAS_FORTIFIED) {
         currentPlayer.state = STATE_IDLE;
         currentPlayer = [self nextPlayer];
+        
     }
 }
 

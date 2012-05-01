@@ -76,14 +76,25 @@
     
     //TODO: add in the risk-style attack logic
     //TODO: add in the ability to keep some units back
-    if(self.armies > territory.armies) {
+    
+    short attackRoll = (short)(arc4random()%6 + 1);
+    short defenseRoll = (short)(arc4random()%6 + 1);
+    
+    if(attackRoll > defenseRoll) {
+        //attacker wins
+        territory.armies--;
+    }else {
+        //defender wins
+        self.armies--;
+    }
+    
+    NSLog(@"Attacked %@ from %@. %@ rolled %d, %@ rolled %d", territory.name, name, territory.name, defenseRoll, name, attackRoll);
+    
+    if(territory.armies <= 0) {
         territory.owner = owner;
-        self.armies-= territory.armies;
         territory.armies = self.armies-1;
         self.armies = 1;
-        
-        NSLog(@"Attacked %@ from %@. Remaining armies on %@: %d", territory.name, name, name, self.armies);
-       return true;
+        return true;
     }
     
     return false;
@@ -128,6 +139,16 @@
     return borderLocations;
 }
 
+-(NSArray*)neighboringTerritoriesForPlayer:(Player*)player {
+    NSMutableArray* territoriesArray = [[NSMutableArray alloc] init];
+    for(Territory* territory in neighboringTerritories) {
+        if(territory.owner != owner) {
+            [territoriesArray addObject:territory];
+        }
+    }
+    return territoriesArray;
+}
+
 -(void)selectWithColor:(UInt32)selectColor {
     UInt8 red = (selectColor) & 0xFF;
     UInt8 green = (selectColor>>8) & 0xFF;
@@ -137,7 +158,7 @@
     glLineWidth(3);
     
     glColor4ub(red, green, blue, alpha);
-    ccDrawCircle(center, 10, CC_DEGREES_TO_RADIANS(360), 10, NO);
+    ccDrawCircle(center, 25, CC_DEGREES_TO_RADIANS(360), 10, NO);
 }
 
 -(void)highlightWithColor:(UInt32)highlightColor {
@@ -164,7 +185,7 @@
         y = [map size].height-y;
                 
         vertices[i] = ccp(x,y);
-    }   
+    }  
     
     glColor4ub(red, green, blue, alpha);
     ccDrawPoly(vertices, borderLocationsSize, YES);

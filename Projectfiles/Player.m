@@ -42,6 +42,11 @@
     return self;
 }
 
+- (void)setup {
+    NSLog(@"OVERRIDE setup!!!");
+    
+}
+
 -(void)place {
     NSLog(@"OVERRIDE place!!!");
 

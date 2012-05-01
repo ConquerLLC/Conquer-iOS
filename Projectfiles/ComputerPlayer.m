@@ -20,4 +20,9 @@
     return self;
 }
 
+
+- (void)setup {
+    
+}
+
 @end

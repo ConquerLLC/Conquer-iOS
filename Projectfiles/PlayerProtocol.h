@@ -11,9 +11,13 @@
 @protocol PlayerProtocol <NSObject>
 
 @required
+
+- (void)setup;
+
 - (void)place;
 - (void)attack;
 - (void)fortify;
+
 - (void)endState;
 - (void)endTurn;
 @end
