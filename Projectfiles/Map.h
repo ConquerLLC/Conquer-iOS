@@ -25,6 +25,7 @@
     NSMutableDictionary* locationsWithColor;
 	NSMutableDictionary* territoryWithColor;
     NSDictionary* properties;
+    int initialArmiesPerTerritory;
     int armiesPerTurn;
     int territoriesForAdditionalArmyPerTurn;
     
@@ -47,6 +48,7 @@
 @property (strong, nonatomic) CCNode* HUD;
 
 @property (strong, nonatomic) NSDictionary* properties;
+@property (nonatomic) int initialArmiesPerTerritory;
 @property (nonatomic) int armiesPerTurn;
 @property (nonatomic) int territoriesForAdditionalArmyPerTurn;
 

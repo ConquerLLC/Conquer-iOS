@@ -42,7 +42,8 @@
 -(NSArray*)locations;
 -(NSArray*)borderLocations;
 
--(NSArray*)neighboringTerritoriesForPlayer:(Player*)player;
+-(NSArray*)neighboringTerritoriesWithOwner:(Player*)player;
+-(NSArray*)neighboringTerritoriesWithoutOwner:(Player*)player;
 
 -(BOOL)isNeighborTo:(Territory*)territory;
 

@@ -1,4 +1,5 @@
 {
+    "InitialArmiesPerTerritory": 4,
     "ArmiesPerTurn": 3,
     "TerritoriesForAdditionalArmyPerTurn": 3,
     "Continents": {

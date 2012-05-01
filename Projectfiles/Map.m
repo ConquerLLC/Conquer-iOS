@@ -29,6 +29,7 @@
 @synthesize continents;
 
 @synthesize properties;
+@synthesize initialArmiesPerTerritory;
 @synthesize armiesPerTurn;
 @synthesize territoriesForAdditionalArmyPerTurn;
 
@@ -92,6 +93,7 @@
         exit(1);
     }
     
+    initialArmiesPerTerritory = [(NSString*)([properties objectForKey:@"InitialArmiesPerTerritory"]) intValue];
     armiesPerTurn = [(NSString*)([properties objectForKey:@"ArmiesPerTurn"]) intValue];
     territoriesForAdditionalArmyPerTurn = [(NSString*)([properties objectForKey:@"TerritoriesForAdditionalArmyPerTurn"]) intValue];
     NSLog(@"Armies per turn: %d", armiesPerTurn);

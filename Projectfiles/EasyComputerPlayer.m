@@ -31,6 +31,11 @@ short attackAttemptCount = 0;
         //pick a random territory
         NSArray* ownedTerritories = [map territoriesForPlayer:self];
         originTerritory = [ownedTerritories objectAtIndex:(int)(arc4random()%[ownedTerritories count])];
+        uint ownedNeighborCount = [[originTerritory neighboringTerritoriesWithOwner:self] count];
+        NSLog(@"There are %d owned neighbors neighboring %@", ownedNeighborCount, originTerritory.name);
+        if(ownedNeighborCount == [[originTerritory neighboringTerritories] count]) {
+            return;
+        }
         
         int armies = ceil(armiesToPlace/5.0f);
         originTerritory.armies+= armies;
@@ -57,8 +62,8 @@ short attackAttemptCount = 0;
         short originSelectAttemptCount = 0;
         while((originTerritory == nil || originTerritory.armies < 2) && originSelectAttemptCount++ < 7) {
             originTerritory = [ownedTerritories objectAtIndex:(int)(arc4random()%[ownedTerritories count])];
-            uint ownedNeighborCount = [[originTerritory neighboringTerritoriesForPlayer:self] count];
-            if(ownedNeighborCount == [[originTerritory neighboringTerritories] count]) {
+            uint attackableNeighborsCount = [[originTerritory neighboringTerritoriesWithoutOwner:self] count];
+            if(attackableNeighborsCount == 0) {
                 originTerritory = nil;
             }
         }
@@ -68,7 +73,7 @@ short attackAttemptCount = 0;
             destinationTerritory = [originTerritory.neighboringTerritories objectAtIndex:(int)(arc4random()%[originTerritory.neighboringTerritories count])];
         }
     
-        if(destinationTerritory.owner == self) {
+        if(destinationTerritory.owner == self || originTerritory == nil || destinationTerritory == nil) {
             return;
         }
         

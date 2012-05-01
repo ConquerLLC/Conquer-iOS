@@ -37,7 +37,7 @@
         labelArmies = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:24];
         [map.HUD addChild: labelArmies];
         
-        [self setArmies:1];
+        [self setArmies:map.initialArmiesPerTerritory];
         
         NSLog(@"Created territory %@ on continent %@", name, continent.name);
 	}
@@ -139,7 +139,17 @@
     return borderLocations;
 }
 
--(NSArray*)neighboringTerritoriesForPlayer:(Player*)player {
+-(NSArray*)neighboringTerritoriesWithOwner:(Player*)player {
+    NSMutableArray* territoriesArray = [[NSMutableArray alloc] init];
+    for(Territory* territory in neighboringTerritories) {
+        if(territory.owner == owner) {
+            [territoriesArray addObject:territory];
+        }
+    }
+    return territoriesArray;
+}
+
+-(NSArray*)neighboringTerritoriesWithoutOwner:(Player*)player {
     NSMutableArray* territoriesArray = [[NSMutableArray alloc] init];
     for(Territory* territory in neighboringTerritories) {
         if(territory.owner != owner) {
