@@ -11,6 +11,7 @@
 
 @class Territory;
 @class CGImageInspection;
+@class Player;
 
 @interface Map : NSObject {
     
@@ -36,6 +37,7 @@
 -(Territory*)territoryAtLocation:(CGPoint)location;
 -(Territory*)territoryAtTouch:(UITouch*)touch;
 -(NSArray*)territories;
+-(NSArray*)territoriesForPlayer:(Player*)player;
 
 -(void) cleanup;
 

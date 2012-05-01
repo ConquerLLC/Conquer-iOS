@@ -24,11 +24,13 @@
 #define STATE_GAME_WON 300
 
 @class Territory;
+@class Map;
 
 @interface Player : NSObject <PlayerProtocol> {
 
     NSString* name;
     UInt32 color;
+    Map* map;
     
     Territory* originTerritory;
     Territory* destinationTerritory;
@@ -41,7 +43,7 @@
     int armiesToPlace;
 }
 
--(id)initWithName:(NSString*)theName andColor:(UInt32)theColor;
+-(id)initWithName:(NSString*)theName andColor:(UInt32)theColor onMap:(Map*)theMap;
 
 -(void)touchedTerritory:(Territory*)territory;
 

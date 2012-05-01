@@ -8,6 +8,7 @@
 
 #import "Player.h"
 #import "Territory.h"
+#import "Map.h"
 
 @implementation Player
 
@@ -22,11 +23,12 @@
 
 @synthesize armiesToPlace;
 
--(id)initWithName:(NSString*)theName andColor:(UInt32)theColor {
+-(id)initWithName:(NSString*)theName andColor:(UInt32)theColor onMap:(Map*)theMap {
 	
 	if ((self = [super init])) {
         name = theName;
         color = theColor;
+        map = theMap;
         originTerritory = nil;
         destinationTerritory = nil;
         
@@ -105,7 +107,7 @@
         }else if(state == STATE_FORTIFYING) {
             //if we're fortifying then both are owned by the player
             if(originTerritory != nil) {
-                if(destinationTerritory == nil && [originTerritory neighbors:territory]) {
+                if(destinationTerritory == nil && [originTerritory isNeighborTo:territory]) {
                     destinationTerritory = territory;
                 }else {
                     originTerritory = territory;
@@ -119,7 +121,7 @@
         
         if(state == STATE_ATTACKING) {
             //if we're attacking then the origin must be set
-            if(originTerritory != nil && [originTerritory neighbors:territory]) {
+            if(originTerritory != nil && [originTerritory isNeighborTo:territory]) {
                 destinationTerritory = territory;
             }else {
                 //invalid touch

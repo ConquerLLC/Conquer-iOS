@@ -19,6 +19,7 @@
 @synthesize center;
 @synthesize owner;
 @synthesize color;
+@synthesize neighboringTerritories;
 @synthesize armies = _armies;
 
 -(id)initWithColor:(UInt32)theColor name:(NSString*)theName onContinent:(Continent*)theContinent onMap:(Map*)theMap {
@@ -48,11 +49,7 @@
     labelArmies.string = [NSString stringWithFormat:@"%d", self.armies];
 }
 
--(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories {
-    neighboringTerritories = theNeighboringTerritories;
-}
-
--(BOOL)neighbors:(Territory*)territory {
+-(BOOL)isNeighborTo:(Territory*)territory {
     //NSLog(@"Checking if %@ neighbors %@", territory.name, name);
     for(Territory* neighbor in neighboringTerritories) {
         if(territory == neighbor) {

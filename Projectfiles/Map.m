@@ -69,6 +69,17 @@
     return territoriesArray;
 }
 
+-(NSArray*)territoriesForPlayer:(Player*)player {
+    NSMutableArray* territoriesArray = [[NSMutableArray alloc] init];
+    for(id key in territoryWithColor) {
+        Territory* territory = [territoryWithColor objectForKey:key];
+        if(territory.owner == player) {
+            [territoriesArray addObject:territory];
+        }
+    }
+    return territoriesArray;    
+}
+
 -(void)initializeMapData {
 	
     NSLog(@"Loading map properties");
@@ -201,7 +212,7 @@
                }
             }
         }
-        [territory setNeighboringTerritories:neighboringTerritories];
+        territory.neighboringTerritories = neighboringTerritories;
     }
     
     

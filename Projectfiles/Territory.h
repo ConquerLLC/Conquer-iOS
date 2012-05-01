@@ -42,8 +42,7 @@
 -(NSArray*)locations;
 -(NSArray*)borderLocations;
 
--(void)setNeighboringTerritories:(NSArray*)theNeighboringTerritories;
--(BOOL)neighbors:(Territory*)territory;
+-(BOOL)isNeighborTo:(Territory*)territory;
 -(BOOL)attack:(Territory*)territory;
 
 
@@ -56,6 +55,7 @@
 @property (nonatomic) UInt32 color;
 
 @property (strong, nonatomic) Player* owner;
+@property (strong, nonatomic) NSArray* neighboringTerritories;
 @property (nonatomic) int armies;
 
 @end

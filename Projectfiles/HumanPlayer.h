@@ -12,7 +12,7 @@
 
 
 
--(id)initWithName:(NSString*)theName andColor:(UInt32)theColor;
+-(id)initWithName:(NSString*)theName andColor:(UInt32)theColor onMap:(Map*)theMap;
 
 @end
 

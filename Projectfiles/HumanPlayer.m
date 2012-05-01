@@ -8,12 +8,13 @@
 
 #import "HumanPlayer.h"
 #import "Territory.h"
+#import "Map.h"
 
 @implementation HumanPlayer
 
--(id)initWithName:(NSString*)theName andColor:(UInt32)theColor {
+-(id)initWithName:(NSString*)theName andColor:(UInt32)theColor onMap:(Map*)theMap {
 	
-	if ((self = [super initWithName:theName andColor:theColor])) {
+	if ((self = [super initWithName:theName andColor:theColor onMap:theMap])) {
         NSLog(@"New human player created with name=%@ and color=%lu", name, color);
     }
         

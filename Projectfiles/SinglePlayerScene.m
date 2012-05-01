@@ -13,7 +13,9 @@
 #import "Player.h"
 #import "HumanPlayer.h"
 #import "ComputerPlayer.h"
+#import "EasyComputerPlayer.h"
 #import "GameWonScene.h"
+#import "GameLostScene.h"
 
 #import "UIColor_ColorFromUInt32.h"
 #import "NSMutableArray_Shuffling.h"
@@ -65,9 +67,9 @@
 		
         //create the players
 		players = [[NSMutableArray alloc] init];
-        [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:(255) + (0<<8) + (0<<16) + (255<<24)]];
-        [players addObject:[[ComputerPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24)]];
-        currentPlayerIndex = 0;
+        [players addObject:[[HumanPlayer alloc] initWithName:@"Steve" andColor:(255) + (0<<8) + (0<<16) + (255<<24) onMap:map]];
+        [players addObject:[[EasyComputerPlayer alloc] initWithName:@"Bobble" andColor:(0) + (255<<8) + (0<<16) + (255<<24) onMap:map]];
+        currentPlayerIndex = (int)(arc4random()%[players count]);
 
         //assign territories to players randomly
         uint playerIndex = 0;
@@ -118,14 +120,15 @@
                 player.state = STATE_GAME_LOST;
                 
                 if([player isKindOfClass:[HumanPlayer class]]) {
-                    
+                    NSLog(@"Game is over because the human player lost");
+                   
                     //oh noes! we lost!
                     
                     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
                     dispatch_queue_t queue = dispatch_get_main_queue();
                     
                     dispatch_after(delay, queue, ^{
-                        [[CCDirector sharedDirector] replaceScene: [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[GameWonScene scene]]];
+                        [[CCDirector sharedDirector] replaceScene: [CCTransitionFlipAngular transitionWithDuration:0.5f scene:[GameLostScene scene]]];
                     });
                     
                     
@@ -227,9 +230,13 @@
 	
     // get the position in tile coordinates from the touch location
     Player* currentPlayer = [players objectAtIndex:currentPlayerIndex];
-    Territory* touchedTerritory = [map territoryAtTouch:[touches anyObject]];
     
-    [currentPlayer touchedTerritory: touchedTerritory];
+    if([currentPlayer isKindOfClass:[HumanPlayer class]]) {
+        Territory* touchedTerritory = [map territoryAtTouch:[touches anyObject]];
+        [currentPlayer touchedTerritory: touchedTerritory];
+    }
+
+    //TODO: check for any UI element touches
 }
 
 -(void) draw {
