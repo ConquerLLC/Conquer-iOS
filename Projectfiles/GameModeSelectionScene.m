@@ -6,8 +6,8 @@
 //  Copyright 2012 Conquer, LLC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "GameModeSelectionScene.h"
-
 #import "SinglePlayerScene.h"
 
 
@@ -38,8 +38,9 @@
         // add the menu to your scene
         [self addChild:myMenu];
         
+		GALogPageView(@"/GameModeSelectionScene")
+		
         NSLog(@"GameModeSelectionScene created");
-
 	}
 	
 	

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Conquer, LLC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "GameLostScene.h"
 #import "GameModeSelectionScene.h"
 
@@ -42,6 +43,8 @@
 		gameLostLabel.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild: gameLostLabel];
         
+		GALogPageView(@"/GameLostScene")
+
         NSLog(@"GameLostScene created");
 	}
 	

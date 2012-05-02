@@ -84,6 +84,7 @@
 -(void)initializeMapData {
 	
     NSLog(@"Loading map properties");
+	double now = [[NSDate date] timeIntervalSince1970];
     
     NSData *jsonData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"Maps/%@/Properties.json", name]];
     NSError *error = nil;
@@ -96,8 +97,9 @@
     initialArmiesPerTerritory = [(NSString*)([properties objectForKey:@"InitialArmiesPerTerritory"]) intValue];
     armiesPerTurn = [(NSString*)([properties objectForKey:@"ArmiesPerTurn"]) intValue];
     territoriesForAdditionalArmyPerTurn = [(NSString*)([properties objectForKey:@"TerritoriesForAdditionalArmyPerTurn"]) intValue];
-    NSLog(@"Armies per turn: %d", armiesPerTurn);
-    NSLog(@"Territories required for each additional army per turn: %d", territoriesForAdditionalArmyPerTurn);
+    NSLog(@"InitialArmiesPerTerritory: %d", initialArmiesPerTerritory);
+    NSLog(@"ArmiesPerTurn: %d", armiesPerTurn);
+    NSLog(@"TerritoriesForAdditionalArmyPerTurn: %d", territoriesForAdditionalArmyPerTurn);
     
     NSDictionary* territoryInfoMap = [properties objectForKey:@"Territories"];
     NSDictionary* continentInfoMap = [properties objectForKey:@"Continents"];
@@ -244,6 +246,8 @@
 	NSLog(@"Hitmap created");
     
     
+	double elapsed = [[NSDate date] timeIntervalSince1970] - now;
+	GALogEvent(@"Map", @"Load Time", name, elapsed);
 }	
 
 -(UInt32)colorAtLocation:(CGPoint)location {

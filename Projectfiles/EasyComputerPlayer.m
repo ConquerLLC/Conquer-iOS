@@ -44,7 +44,9 @@ short attackAttemptCount = 0;
         
         stateDescription = [NSString stringWithFormat:@"%d armies to place", armiesToPlace];
         
+		//TODO: this should NOT be done with sleeps as it screws up the game loop timing
         usleep(500 * 1000);
+		
     }else {
         [self endState];
     }
@@ -68,10 +70,12 @@ short attackAttemptCount = 0;
             }
         }
         
-        short destinationSelectAttemptCount = 0;
-        while((destinationTerritory == nil || destinationTerritory.owner == self) && destinationSelectAttemptCount++ < 7) {
-            destinationTerritory = [originTerritory.neighboringTerritories objectAtIndex:(int)(arc4random()%[originTerritory.neighboringTerritories count])];
-        }
+		if(originTerritory != nil) {
+			short destinationSelectAttemptCount = 0;
+			while((destinationTerritory == nil || destinationTerritory.owner == self) && destinationSelectAttemptCount++ < 7) {
+				destinationTerritory = [originTerritory.neighboringTerritories objectAtIndex:(int)(arc4random()%[originTerritory.neighboringTerritories count])];
+			}
+		}
     
         if(destinationTerritory.owner == self || originTerritory == nil || destinationTerritory == nil) {
             return;
@@ -86,6 +90,7 @@ short attackAttemptCount = 0;
         originTerritory = nil;
         destinationTerritory = nil;
         
+		//TODO: this should NOT be done with sleeps as it screws up the game loop timing
         usleep(500 * 1000);
         
     }else {

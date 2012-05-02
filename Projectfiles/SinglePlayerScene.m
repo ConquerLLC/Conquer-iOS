@@ -92,7 +92,8 @@
             [self schedule:@selector(gameLoop:)];
         });
         
-        
+		GALogPageView(@"/SinglePlayerScene")
+
         NSLog(@"SinglePlayerScene created");
 	}
 	

@@ -12,7 +12,7 @@
 #define DEBUG_MODE YES
 
 
-
+#import "GAWrapper.h"
 
 
 

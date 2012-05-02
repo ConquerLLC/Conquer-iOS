@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Conquer, LLC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "GameWonScene.h"
 #import "GameModeSelectionScene.h"
 
@@ -42,6 +43,8 @@
 		gameWonLabel.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild: gameWonLabel];
     
+		GALogPageView(@"/GameWonScene")
+
         NSLog(@"GameWonScene created");
 	}
 	
