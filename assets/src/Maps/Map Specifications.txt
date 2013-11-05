@@ -1,0 +1,9 @@
+Map Specifications
+
+All maps are in their own folder with 2 files:
+1) A hit map
+	- All countries/territories should be a distinct RGB color - alpha channel is ignored.
+	- Water (inaccessible areas) should be pure blue RGB (0,0,255) - alpha channel is ignored.
+2) A display map
+	- The visible part of the mpa - can be the hit map with water set to completely transparent
+	- Alpha channels can vary and will be displayed as indicated.
